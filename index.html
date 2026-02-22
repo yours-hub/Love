@@ -3,28 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Surprise</title>
+<title>Happy Birthday Ammara</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
-/* 🌸 Basic Body & Background */
+/* 🌸 General Body & Background */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
     overflow-x: hidden;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
     transition: background 1s;
+    min-height: 100vh;
 }
 
-/* 🎉 Landing Text */
-#landingText {
-    font-size: 2.5em;
-    color: #ff0066;
+/* 🎉 Landing Page */
+#landingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-bottom: 30px;
+}
+#landingText {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4em;
+    color: #ff0066;
+    margin-bottom: 20px;
+}
+#landingText span {
+    font-size: 1.5em;
+    vertical-align: middle;
 }
 
 /* ✨ Buttons */
@@ -39,21 +50,18 @@ button {
     font-weight: bold;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
-
-/* Landing Button */
 #openBtn {
-    background: linear-gradient(to right, #ff99cc, #ff6699);
-    color: white;
-    font-size: 1.5em;
-}
-
-/* Yes / No Buttons */
-#yesBtn, #noBtn {
     background: linear-gradient(to right, #ff99cc, #ff3399);
     color: white;
+    font-size: 1.8em;
+    animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    0% { box-shadow: 0 0 10px #ff66b3; }
+    100% { box-shadow: 0 0 25px #ff3399; }
 }
 
-/* Hidden Section */
+/* 🎮 Game Section */
 #gameSection {
     display: none;
     flex-direction: column;
@@ -61,17 +69,17 @@ button {
     opacity: 0;
     transition: opacity 1s;
 }
-
-/* Message Box */
 #messageBox {
     margin: 20px;
-    font-size: 1.4em;
+    font-size: 1.5em;
     color: #ff0066;
     text-align: center;
     min-height: 50px;
 }
-
-/* Next Button */
+#yesBtn, #noBtn {
+    background: linear-gradient(to right, #ff99cc, #ff3399);
+    color: white;
+}
 #nextBtn {
     background: linear-gradient(to right, #ffb3d1, #ff66b3);
     color: white;
@@ -80,7 +88,7 @@ button {
     display: none;
 }
 
-/* Floating Hearts */
+/* ❤️ Floating Hearts */
 .heart {
     position: absolute;
     width: 25px;
@@ -99,10 +107,57 @@ button {
 }
 .heart::before { top: -12.5px; left: 0; }
 .heart::after { top: 0; left: -12.5px; }
-
 @keyframes floatHeart {
     0% { transform: translateY(100vh) rotate(45deg) scale(0.8); opacity: 0.8;}
     100% { transform: translateY(-100px) rotate(45deg) scale(1); opacity: 0.2;}
+}
+
+/* 🌧 Rainy Memory Page */
+#storySection {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    color: #ff0066;
+    background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
+    overflow: hidden;
+    padding: 20px;
+}
+.storyLine {
+    opacity: 0;
+    font-size: 1.8em;
+    margin: 15px 0;
+    transition: opacity 2s;
+}
+
+/* 🎈 Balloons / Hearts Overlay */
+.balloon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ff99cc;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0.8;}
+    100% { transform: translateY(-100px) scale(1); opacity: 0.2;}
+}
+
+/* 🌧 Rain Animation */
+.rainDrop {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: #a3c2f2;
+    opacity: 0.5;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    0% { transform: translateY(-20px); opacity:0.5; }
+    100% { transform: translateY(100vh); opacity:0.5; }
 }
 </style>
 </head>
@@ -110,8 +165,8 @@ button {
 
 <!-- Landing Page -->
 <div id="landingPage">
-    <div id="landingText">🎉 Happy Birthday, [Her Name]! 🎉</div>
-    <button id="openBtn">Click for Surprise ❤️</button>
+    <div id="landingText">Happy Birthday Ammara <span>❤️</span></div>
+    <button id="openBtn">Click for Surprise</button>
 </div>
 
 <!-- Game Section -->
@@ -122,9 +177,19 @@ button {
     <button id="nextBtn">Next 🌸</button>
 </div>
 
+<!-- Story / Rainy Memory Section -->
+<div id="storySection">
+    <div class="storyLine">It all started on a rainy day… 🌧️</div>
+    <div class="storyLine">You asked me about the girl I liked… 💭</div>
+    <div class="storyLine">I didn’t tell you directly, but in secret, you knew… ❤️</div>
+    <div class="storyLine">From that day to today, my heart has never changed 😘</div>
+    <div class="storyLine">I still want you as my wife 💞</div>
+    <div class="storyLine">Through fights and silly break-ups, we stayed stronger together 💖</div>
+</div>
+
 <script>
 // 🌸 Floating Hearts
-for(let i=0;i<15;i++){
+for(let i=0;i<20;i++){
     const h = document.createElement("div");
     h.classList.add("heart");
     h.style.left = Math.random()*window.innerWidth + "px";
@@ -132,7 +197,25 @@ for(let i=0;i<15;i++){
     document.body.appendChild(h);
 }
 
-// 🎉 Elements
+// 🎈 Floating Balloons
+for(let i=0;i<10;i++){
+    const b = document.createElement("div");
+    b.classList.add("balloon");
+    b.style.left = Math.random()*window.innerWidth + "px";
+    b.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(b);
+}
+
+// 🌧 Rain Drops
+for(let i=0;i<80;i++){
+    const r = document.createElement("div");
+    r.classList.add("rainDrop");
+    r.style.left = Math.random()*window.innerWidth + "px";
+    r.style.animationDuration = (0.5 + Math.random()*0.5) + "s";
+    document.body.appendChild(r);
+}
+
+// 🎮 Elements
 const landingPage = document.getElementById("landingPage");
 const openBtn = document.getElementById("openBtn");
 const gameSection = document.getElementById("gameSection");
@@ -140,8 +223,10 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const messageBox = document.getElementById("messageBox");
 const nextBtn = document.getElementById("nextBtn");
+const storySection = document.getElementById("storySection");
+const storyLines = document.querySelectorAll(".storyLine");
 
-// 🌟 Landing Page Button
+// 🌟 Landing Button
 openBtn.onclick = () => {
     landingPage.style.display = "none";
     gameSection.style.display = "flex";
@@ -151,7 +236,6 @@ openBtn.onclick = () => {
 
 // 🎮 Game Logic
 let yesClickedFirst = false;
-
 yesBtn.onclick = () => {
     if(!yesClickedFirst){
         messageBox.innerText = "I dare you to click on No 😏";
@@ -160,24 +244,24 @@ yesBtn.onclick = () => {
 };
 
 noBtn.onclick = () => {
-    if(yesClickedFirst){
-        // No clicked after Yes
-        messageBox.innerText = "I know you still love me ❤️";
-        noBtn.innerText = "Yes 😘";
-        yesBtn.style.display = "none";
-        nextBtn.style.display = "inline-block";
-    } else {
-        // First click on No (optional: instant Yes)
-        messageBox.innerText = "I know you still love me ❤️";
-        noBtn.innerText = "Yes 😘";
-        yesBtn.style.display = "none";
-        nextBtn.style.display = "inline-block";
-    }
+    messageBox.innerText = "I know you still love me ❤️";
+    noBtn.innerText = "Yes 😘";
+    yesBtn.style.display = "none";
+    nextBtn.style.display = "inline-block";
 };
 
-// Next button (for testing, will lead to next story page)
+// 🎉 Next Button → Rainy Memory Story
 nextBtn.onclick = () => {
-    alert("Next page will start our love story with rain memory 🌧️❤️");
+    gameSection.style.display = "none";
+    storySection.style.display = "flex";
+
+    let delay = 0;
+    storyLines.forEach(line => {
+        setTimeout(()=>{
+            line.style.opacity = 1;
+        }, delay);
+        delay += 2500; // 2.5 seconds between lines
+    });
 };
 </script>
 
