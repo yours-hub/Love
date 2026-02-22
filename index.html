@@ -1,65 +1,105 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>For My Love ❤️</title>
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: black;
-    color: white;
-    text-align: center;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
     overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.container {
-    padding: 40px 20px;
+h1 {
+    color: #ff0066;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
+/* Buttons */
 button {
     padding: 12px 25px;
     font-size: 18px;
-    background: white;
-    color: black;
-    border: none;
     border-radius: 30px;
+    border: none;
     cursor: pointer;
-    margin-top: 20px;
+    margin: 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
 }
 
-.hidden {
-    display: none;
+#yesBtn {
+    background-color: #ff99cc;
+    color: white;
 }
 
-.fade {
-    animation: fadeIn 2s ease forwards;
+#noBtn {
+    background-color: #ff6699;
+    color: white;
+    position: relative;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+/* Balloons / Hearts floating in background */
+.balloon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ff99cc;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0.8;}
+    100% { transform: translateY(-100px) scale(1); opacity: 0.2;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-    <h1>Hey Love</h1>
-    <button onclick="start()">Click if you still love me</button>
-
-    <div id="message" class="hidden">
-        <p class="fade">Five years ago...</p>
-        <p class="fade">We had no idea we were building forever.</p>
-        <p class="fade">And if I had to choose again...</p>
-        <h2 class="fade">I would still choose you ❤️</h2>
-    </div>
-</div>
+<h1>Do you love me? ❤️</h1>
+<button id="yesBtn" onclick="yesClick()">Yes</button>
+<button id="noBtn" onclick="noClick()">No</button>
 
 <script>
-function start() {
-    document.getElementById("message").classList.remove("hidden");
+// Yes button action
+function yesClick() {
+    alert("I knew it 😘 I love you too ❤️");
+}
+
+// No button action (mischievous)
+const noBtn = document.getElementById("noBtn");
+function noClick() {
+    // Move button to random position
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    // Optional: after 2 clicks, change text to Yes
+    if (!noBtn.dataset.clicks) noBtn.dataset.clicks = 1;
+    else noBtn.dataset.clicks++;
+    if (noBtn.dataset.clicks >= 2) {
+        noBtn.innerText = "Yes 😏";
+        noBtn.style.backgroundColor = "#ff99cc";
+    }
+}
+
+// Generate floating balloons
+for(let i=0;i<10;i++){
+    const b = document.createElement("div");
+    b.classList.add("balloon");
+    b.style.left = Math.random() * window.innerWidth + "px";
+    b.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(b);
 }
 </script>
 
