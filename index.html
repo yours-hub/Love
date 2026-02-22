@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 40px 20px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.fade {
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hey Love</h1>
+    <button onclick="start()">Click if you still love me</button>
+
+    <div id="message" class="hidden">
+        <p class="fade">Five years ago...</p>
+        <p class="fade">We had no idea we were building forever.</p>
+        <p class="fade">And if I had to choose again...</p>
+        <h2 class="fade">I would still choose you ❤️</h2>
+    </div>
+</div>
+
+<script>
+function start() {
+    document.getElementById("message").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
