@@ -15,7 +15,8 @@ body {
     background: linear-gradient(135deg, #ffe6f0, #fff0e6);
     overflow: hidden;
     color: #333;
-<!-- Decorations for all pages -->
+}
+    <!-- Decorations for all pages -->
 <img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:10%;width:40px;">
 <img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:50%;width:50px;">
 <img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:30%;width:30px;">
@@ -23,6 +24,15 @@ body {
 <img src="https://i.ibb.co/fC1sFbF/flower.png" class="decoration" style="left:80%;width:30px;">
 
 <div class="container">
+.container {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
 .active { display: flex !important; }
 h1 { margin: 10px 0; }
 button {
@@ -200,11 +210,10 @@ function startMemory() {
 
 /* Questions Page Logic */
 const questions = [
-    {q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
+    {q:"What lights up my dark days?", o:["Sun","Moon"], a:"Your presence"},
     {q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
     {q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
-    {q:"Which always makes me smile instantly?", o:["Joke","Music"], a:"Your eyes"},
-    {q:"What can black magic never control?", o:["Heart","Mind"], a:"Your eyes"},
+    {q:"strongest magic would be?", o:["Black magic","Ancient spell"], a:"Your eyes"},
     {q:"Who has my full attention instantly?", o:["Me","You"], a:"Yes, of course you"}
 ];
 let currentQ=0;
