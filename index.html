@@ -4,70 +4,192 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ammara</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body, html { width:100%; height:100%; font-family: 'Roboto', sans-serif; overflow:hidden; background: linear-gradient(135deg, #ffe6f2, #fff0e6); display:flex; justify-content:center; align-items:center; flex-direction:column; position:relative; }
-
-  /* Floating hearts and balloons */
-  .float {
-    position:absolute;
-    font-size: 24px;
-    animation: float 6s linear infinite;
-    opacity:0.8;
-  }
-
-  @keyframes float {
-    0% { transform: translateY(0) rotate(0deg); opacity:0.8; }
-    50% { opacity:1; }
-    100% { transform: translateY(-800px) rotate(360deg); opacity:0; }
-  }
-
-  h1 { font-family: 'Great Vibes', cursive; font-size: 6vw; color:#ff4d94; text-align:center; margin-bottom:10px; text-shadow: 2px 2px 6px #ffe6f2; }
-  h2 { font-family: 'Pacifico', cursive; font-size: 4vw; color:#ff1a75; margin-bottom:10px; text-shadow: 1px 1px 3px #ffcce6; }
-  p.date { font-size:2vw; color:#ff6699; margin-bottom:40px; }
-
-  .btn {
-    padding: 15px 35px;
-    font-size: 1.8vw;
-    font-family: 'Pacifico', cursive;
-    color:#fff;
-    background: #ff66b3;
-    border:none;
-    border-radius: 50px;
-    cursor:pointer;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-  }
-
-  .btn:hover {
-    background:#ff3385;
-    transform: scale(1.1) rotate(-2deg);
-  }
-
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: 'Raleway', sans-serif; background: #ffe6f0; overflow-x:hidden;}
+    .page {display:none; width:100%; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; transition: all 0.5s ease;}
+    .active {display:flex;}
+    h1 {font-family: 'Great Vibes', cursive; font-size: 60px; color: #ff4d94; margin-bottom:10px;}
+    h2 {font-family: 'Indie Flower', cursive; font-size: 40px; color:#ff1a8c; margin-bottom:20px;}
+    p {font-size: 20px; color:#333; margin:10px 0; line-height:1.6;}
+    .button {padding:15px 30px; margin-top:20px; font-size:20px; border:none; border-radius:50px; cursor:pointer; transition:0.3s; background: linear-gradient(45deg,#ff80bf,#ff1a8c); color:white;}
+    .button:hover {transform:scale(1.1);}
+    .options {display:flex; gap:20px; margin-top:20px; flex-wrap:wrap; justify-content:center;}
+    .option-btn {padding:12px 25px; font-size:18px; border:none; border-radius:30px; cursor:pointer; transition:0.3s; background: #ff99cc; color:white;}
+    .option-btn:hover {transform: scale(1.1);}
+    .fade-in {animation: fadeIn 1s forwards;}
+    @keyframes fadeIn {0%{opacity:0; transform: translateY(20px);} 100%{opacity:1; transform: translateY(0);}}
+    .balloons, .hearts {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;}
+    .balloon, .heart {position:absolute; width:40px; height:40px; background:red; border-radius:50%; animation: floatUp linear infinite; opacity:0.8;}
+    .heart {background: pink; clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 85% 25%, 100% 40%, 75% 65%, 50% 100%, 25% 65%, 0% 40%, 15% 25%, 25% 12%, 39% 12%);}
+    @keyframes floatUp {0%{transform: translateY(100vh);} 100%{transform: translateY(-50px);}}
+    .memory-text p {opacity:0;}
 </style>
 </head>
 <body>
 
-<h1>Happy Birthday</h1>
-<h2>Ammara</h2>
-<p class="date">6th March</p>
-<button class="btn" onclick="window.location.href='secondpage.html'">Open Surprise</button>
+<!-- Landing Page -->
+<div class="page active" id="page1">
+    <div class="balloons"></div>
+    <h1 class="fade-in">Happy Birthday</h1>
+    <h2 class="fade-in" style="animation-delay:0.5s;">Ammara</h2>
+    <p class="fade-in" style="animation-delay:1s;">6th March</p>
+    <button class="button fade-in" style="animation-delay:1.5s;" onclick="nextPage(2)">Open Your Surprise 🎉</button>
+</div>
 
-<!-- Floating hearts/balloons -->
-<div class="float" style="left:10%;">💖</div>
-<div class="float" style="left:25%;">🎈</div>
-<div class="float" style="left:40%;">💘</div>
-<div class="float" style="left:55%;">🎉</div>
-<div class="float" style="left:70%;">💓</div>
-<div class="float" style="left:85%;">💖</div>
+<!-- First Game: Do You Still Love Me -->
+<div class="page" id="page2">
+    <h1>Do you still love me?</h1>
+    <div class="options">
+        <button class="option-btn" onclick="gameAnswer('yes')">Yes</button>
+        <button class="option-btn" onclick="gameAnswer('no')">No</button>
+    </div>
+    <p id="game-msg" style="margin-top:20px; font-size:22px; color:#ff3366;"></p>
+    <button class="button" id="next1" style="display:none;margin-top:30px;" onclick="nextPage(3)">Next</button>
+</div>
+
+<!-- Memory Page -->
+<div class="page" id="page3">
+    <div class="balloons"></div>
+    <h1>Memory</h1>
+    <div class="memory-text" style="margin-top:20px; font-size:22px; line-height:1.8; color:#660033;">
+        <p>On that rainy day, you asked about my crush…</p>
+        <p>I didn’t say your name directly, but you knew…</p>
+        <p>From that day till now, four to five years have passed…</p>
+        <p>My love for you hasn’t changed at all.</p>
+        <p>Despite all our fights and break-up threats, we are still happy together.</p>
+        <p>God knows my feelings are still the same. Nothing has changed.</p>
+    </div>
+    <button class="button" onclick="revealMemory()">Next</button>
+</div>
+
+<!-- Test Start Page -->
+<div class="page" id="page4">
+    <h1>Get ready for a test!</h1>
+    <p>Let's see how well you know me ❤️</p>
+    <button class="button" onclick="nextPage(5)">Yes, I'm ready!</button>
+</div>
+
+<!-- Questions Page -->
+<div class="page" id="page5">
+    <h1>Question</h1>
+    <p id="question-text"></p>
+    <div class="options">
+        <button class="option-btn" onclick="checkAnswer(this)">Option 1</button>
+        <button class="option-btn" onclick="checkAnswer(this)">Option 2</button>
+    </div>
+    <p id="answer-msg" style="margin-top:20px; color:#ff3366; font-size:20px;"></p>
+    <button class="button" id="next-question" style="display:none;margin-top:30px;" onclick="nextQuestion()">Next</button>
+</div>
+
+<!-- Final Birthday Message -->
+<div class="page" id="page6">
+    <div class="hearts"></div>
+    <h1>Happy Birthday Ammara ♥️</h1>
+    <p style="margin-top:20px; font-size:22px; line-height:1.8; color:#660033;">
+        Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy.
+    </p>
+</div>
 
 <script>
-  function nextPage(){
-    alert("This will move to the next page!");
-    // Later we will link to second page: window.location.href = 'secondpage.html';
-  }
-</script>
+let currentPage = 1;
 
+function nextPage(page) {
+    document.getElementById("page"+currentPage).classList.remove("active");
+    document.getElementById("page"+page).classList.add("active");
+    currentPage = page;
+}
+
+// First Game Logic
+let gameClickedYes = false;
+function gameAnswer(ans){
+    let msg = document.getElementById("game-msg");
+    let nextBtn = document.getElementById("next1");
+    if(ans==='yes'){
+        msg.textContent = "I dare you to click on No 😏";
+        gameClickedYes = true;
+    } else {
+        if(gameClickedYes){
+            msg.textContent = "Yes was hiding behind No 😘 I knew it!";
+            nextBtn.style.display = "inline-block";
+        } else {
+            msg.textContent = "Try clicking Yes first 😉";
+        }
+    }
+}
+
+// Memory Page reveal
+function revealMemory(){
+    let texts = document.querySelectorAll("#page3 .memory-text p");
+    let index = 0;
+    texts.forEach(t=>t.style.opacity=0);
+    function showNext(){
+        if(index<texts.length){
+            texts[index].style.opacity=1;
+            index++;
+            setTimeout(showNext, 2000);
+        } else {
+            nextPage(4);
+        }
+    }
+    showNext();
+}
+
+// Questions
+const questions = [
+    {q:"What lights up my dark night?", opt:["Sun","Moon"], ans:"Your presence"},
+    {q:"If happiness were a place, where would it be?", opt:["Heaven","Home"], ans:"Next to you"},
+    {q:"If love had a flavor, which would it taste like?", opt:["Sweet","Bitter"], ans:"Just like you"},
+    {q:"Which magical power captivates me the most?", opt:["Black magic","Any magic"], ans:"Your eyes"},
+    {q:"Which makes me smile instantly?", opt:["Joke","Song"], ans:"Correct"},
+    {q:"Which captures all my attention?", opt:["Me","You"], ans:"Yes, of course you"}
+];
+
+let currentQ = 0;
+function loadQuestion(){
+    let q = questions[currentQ];
+    document.getElementById("question-text").textContent = q.q;
+    let opts = document.querySelectorAll("#page5 .option-btn");
+    opts[0].textContent = q.opt[0];
+    opts[1].textContent = q.opt[1];
+    document.getElementById("answer-msg").textContent = "";
+    document.getElementById("next-question").style.display="none";
+}
+
+function checkAnswer(btn){
+    let msg = document.getElementById("answer-msg");
+    msg.textContent = questions[currentQ].ans;
+    document.getElementById("next-question").style.display="inline-block";
+}
+
+function nextQuestion(){
+    currentQ++;
+    if(currentQ<questions.length){
+        loadQuestion();
+    } else {
+        nextPage(6);
+    }
+}
+
+// Load first question when page5 opens
+document.getElementById("page5").addEventListener("transitionstart",loadQuestion);
+
+// Balloons & hearts animation
+function createDecor(type){
+    let container = document.querySelector(`.${type}`);
+    for(let i=0;i<15;i++){
+        let el = document.createElement("div");
+        el.className=type.slice(0,-1);
+        el.style.left=Math.random()*90+"%";
+        el.style.animationDuration=(3+Math.random()*3)+"s";
+        container.appendChild(el);
+    }
+}
+createDecor("balloons");
+createDecor("hearts");
+
+</script>
 </body>
 </html>
