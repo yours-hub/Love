@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
+<title>Happy Birthday Surprise</title>
 <style>
+/* 🌸 Basic Body & Background */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -15,92 +16,169 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: background 1s;
 }
 
-h1 {
+/* 🎉 Landing Text */
+#landingText {
+    font-size: 2.5em;
     color: #ff0066;
-    font-size: 2.2em;
-    margin-bottom: 30px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
-/* Buttons */
+/* ✨ Buttons */
 button {
-    padding: 12px 25px;
+    padding: 15px 35px;
     font-size: 18px;
-    border-radius: 30px;
+    border-radius: 40px;
     border: none;
     cursor: pointer;
     margin: 10px;
     transition: all 0.3s ease;
     font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
 
-#yesBtn {
-    background-color: #ff99cc;
+/* Landing Button */
+#openBtn {
+    background: linear-gradient(to right, #ff99cc, #ff6699);
+    color: white;
+    font-size: 1.5em;
+}
+
+/* Yes / No Buttons */
+#yesBtn, #noBtn {
+    background: linear-gradient(to right, #ff99cc, #ff3399);
     color: white;
 }
 
-#noBtn {
-    background-color: #ff6699;
-    color: white;
-    position: relative;
+/* Hidden Section */
+#gameSection {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s;
 }
 
-/* Balloons / Hearts floating in background */
-.balloon {
+/* Message Box */
+#messageBox {
+    margin: 20px;
+    font-size: 1.4em;
+    color: #ff0066;
+    text-align: center;
+    min-height: 50px;
+}
+
+/* Next Button */
+#nextBtn {
+    background: linear-gradient(to right, #ffb3d1, #ff66b3);
+    color: white;
+    font-size: 1.3em;
+    padding: 12px 30px;
+    display: none;
+}
+
+/* Floating Hearts */
+.heart {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: #ff99cc;
-    border-radius: 50%;
-    animation: floatUp linear infinite;
+    width: 25px;
+    height: 25px;
+    background-color: #ff66b3;
+    transform: rotate(45deg);
+    animation: floatHeart linear infinite;
 }
+.heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: #ff66b3;
+    border-radius: 50%;
+}
+.heart::before { top: -12.5px; left: 0; }
+.heart::after { top: 0; left: -12.5px; }
 
-@keyframes floatUp {
-    0% { transform: translateY(100vh) scale(0.8); opacity: 0.8;}
-    100% { transform: translateY(-100px) scale(1); opacity: 0.2;}
+@keyframes floatHeart {
+    0% { transform: translateY(100vh) rotate(45deg) scale(0.8); opacity: 0.8;}
+    100% { transform: translateY(-100px) rotate(45deg) scale(1); opacity: 0.2;}
 }
 </style>
 </head>
 <body>
 
-<h1>Do you love me? ❤️</h1>
-<button id="yesBtn" onclick="yesClick()">Yes</button>
-<button id="noBtn" onclick="noClick()">No</button>
+<!-- Landing Page -->
+<div id="landingPage">
+    <div id="landingText">🎉 Happy Birthday, [Her Name]! 🎉</div>
+    <button id="openBtn">Click for Surprise ❤️</button>
+</div>
+
+<!-- Game Section -->
+<div id="gameSection">
+    <div id="messageBox"></div>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <button id="nextBtn">Next 🌸</button>
+</div>
 
 <script>
-// Yes button action
-function yesClick() {
-    alert("I knew it 😘 I love you too ❤️");
+// 🌸 Floating Hearts
+for(let i=0;i<15;i++){
+    const h = document.createElement("div");
+    h.classList.add("heart");
+    h.style.left = Math.random()*window.innerWidth + "px";
+    h.style.animationDuration = (4 + Math.random()*4) + "s";
+    document.body.appendChild(h);
 }
 
-// No button action (mischievous)
+// 🎉 Elements
+const landingPage = document.getElementById("landingPage");
+const openBtn = document.getElementById("openBtn");
+const gameSection = document.getElementById("gameSection");
+const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-function noClick() {
-    // Move button to random position
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-    // Optional: after 2 clicks, change text to Yes
-    if (!noBtn.dataset.clicks) noBtn.dataset.clicks = 1;
-    else noBtn.dataset.clicks++;
-    if (noBtn.dataset.clicks >= 2) {
-        noBtn.innerText = "Yes 😏";
-        noBtn.style.backgroundColor = "#ff99cc";
-    }
+const messageBox = document.getElementById("messageBox");
+const nextBtn = document.getElementById("nextBtn");
+
+// 🌟 Landing Page Button
+openBtn.onclick = () => {
+    landingPage.style.display = "none";
+    gameSection.style.display = "flex";
+    setTimeout(()=>{ gameSection.style.opacity = 1; }, 50);
+    messageBox.innerText = "Do you still love me?";
 }
 
-// Generate floating balloons
-for(let i=0;i<10;i++){
-    const b = document.createElement("div");
-    b.classList.add("balloon");
-    b.style.left = Math.random() * window.innerWidth + "px";
-    b.style.animationDuration = (5 + Math.random() * 5) + "s";
-    document.body.appendChild(b);
-}
+// 🎮 Game Logic
+let yesClickedFirst = false;
+
+yesBtn.onclick = () => {
+    if(!yesClickedFirst){
+        messageBox.innerText = "I dare you to click on No 😏";
+        yesClickedFirst = true;
+    }
+};
+
+noBtn.onclick = () => {
+    if(yesClickedFirst){
+        // No clicked after Yes
+        messageBox.innerText = "I know you still love me ❤️";
+        noBtn.innerText = "Yes 😘";
+        yesBtn.style.display = "none";
+        nextBtn.style.display = "inline-block";
+    } else {
+        // First click on No (optional: instant Yes)
+        messageBox.innerText = "I know you still love me ❤️";
+        noBtn.innerText = "Yes 😘";
+        yesBtn.style.display = "none";
+        nextBtn.style.display = "inline-block";
+    }
+};
+
+// Next button (for testing, will lead to next story page)
+nextBtn.onclick = () => {
+    alert("Next page will start our love story with rain memory 🌧️❤️");
+};
 </script>
 
 </body>
