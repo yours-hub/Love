@@ -5,29 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ammara</title>
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Indie+Flower&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato&family=Roboto&display=swap" rel="stylesheet">
 <style>
-  /* Reset and general styles */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Indie Flower', cursive; overflow-x:hidden; background: #ffe6f0; color: #333; }
-  .center { display:flex; justify-content:center; align-items:center; flex-direction:column; min-height:100vh; text-align:center; }
-  h1,h2,h3,p { margin:10px 0; }
-  button { padding: 12px 25px; border:none; border-radius:10px; cursor:pointer; font-family: 'Sacramento', cursive; font-size:1.2em; background:#ff99cc; color:white; transition:all 0.3s ease; }
-  button:hover { background:#ff66aa; transform:scale(1.1); }
-  .hidden { display:none; opacity:0; transition: opacity 0.8s ease; }
-  .fade-in { opacity:1; transition: opacity 1s ease; }
-  /* Background animations */
-  .balloons { position:absolute; width:100%; height:100%; pointer-events:none; overflow:hidden; }
-  .balloon { position:absolute; bottom:-100px; width:50px; height:70px; background:red; border-radius:50% 50% 50% 50%; animation: rise 8s linear infinite; }
-  @keyframes rise { 0%{transform:translateY(0) rotate(0deg);} 100%{transform:translateY(-110vh) rotate(360deg);} }
-  .rain { position:absolute; width:2px; height:15px; background:lightblue; animation: fall 1s linear infinite; opacity:0.7; }
-  @keyframes fall { 0%{top:-10px;} 100%{top:100vh;} }
-  /* Page styling */
-  .page { position:absolute; width:100%; height:100%; top:0; left:0; background:transparent; display:none; flex-direction:column; justify-content:center; align-items:center; padding:20px; }
-  .active { display:flex; }
-  .letter-line { font-family:'Great Vibes', cursive; font-size:1.4em; margin:5px 0; opacity:0; transition:opacity 1s ease; }
-  .question { font-family:'Pacifico', cursive; font-size:1.3em; margin:15px 0; }
-  .answer-btn { margin:8px; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Lato',sans-serif;background:#ffe6f0;color:#333;overflow-x:hidden;}
+  .center{display:flex;justify-content:center;align-items:center;flex-direction:column;min-height:100vh;text-align:center;padding:20px;}
+  h1,h2,h3,p{margin:10px 0;}
+  button{padding:12px 25px;border:none;border-radius:10px;cursor:pointer;font-family:'Roboto',sans-serif;font-size:1.2em;background:#ff99cc;color:white;transition:all 0.3s ease;}
+  button:hover{background:#ff66aa;transform:scale(1.05);}
+  .hidden{display:none;opacity:0;transition:opacity 0.8s ease;}
+  .fade-in{opacity:1;transition:opacity 1s ease;}
+  .page{position:absolute;width:100%;height:100%;top:0;left:0;background:transparent;display:none;flex-direction:column;justify-content:center;align-items:center;padding:20px;}
+  .active{display:flex;}
+  .letter-line{font-family:'Playfair Display',serif;font-size:1.4em;margin:5px 0;opacity:0;transition:opacity 1s ease;}
+  .question{font-family:'Lato',sans-serif;font-size:1.3em;margin:15px 0;}
+  .answer-btn{margin:8px;}
+  /* Background Decorations */
+  .balloons{position:absolute;width:100%;height:100%;pointer-events:none;overflow:hidden;}
+  .balloon{position:absolute;bottom:-100px;width:50px;height:70px;border-radius:50%;animation:rise 8s linear infinite;}
+  @keyframes rise{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(-110vh) rotate(360deg);}}
+  .rain{position:absolute;width:2px;height:15px;background:lightblue;animation:fall 1s linear infinite;opacity:0.6;}
+  @keyframes fall{0%{top:-10px;}100%{top:100vh;}}
 </style>
 </head>
 <body>
@@ -37,13 +35,13 @@
 
 <!-- Landing Page -->
 <div class="page active" id="landing">
-  <h1 style="font-size:4em; color:#ff3399;">Happy Birthday</h1>
-  <h2 style="font-family:'Sacramento',cursive; font-size:3em; color:#ff66cc;">Ammara</h2>
+  <h1 style="font-family:'Playfair Display',serif;font-size:5em;color:#ff3399;">Happy Birthday</h1>
+  <h2 style="font-family:'Lato',sans-serif;font-size:3em;color:#ff66cc;">Ammara</h2>
   <h3 style="color:#ff66cc;">6th March</h3>
   <button onclick="nextPage('loveGame')">Open Surprise 🎁</button>
 </div>
 
-<!-- Do You Still Love Me Game -->
+<!-- Love Game Page -->
 <div class="page" id="loveGame">
   <h2>Do you still love me?</h2>
   <button class="answer-btn" onclick="loveAnswer('yes')">Yes</button>
@@ -64,7 +62,7 @@
 
 <!-- Test Intro Page -->
 <div class="page" id="testIntro">
-  <h2>Now you’ll be put into a fun test! Are you ready?</h2>
+  <h2>You’re about to enter a fun test! Are you ready?</h2>
   <button onclick="nextPage('questions')">Yes</button>
 </div>
 
@@ -75,10 +73,13 @@
 
 <script>
 /* Balloon animation generator */
-const balloonsContainer = document.getElementById('balloons');
+const balloonsContainer=document.getElementById('balloons');
 for(let i=0;i<15;i++){
-  let b=document.createElement('div'); b.className='balloon'; b.style.left=Math.random()*100+'%'; b.style.background=`hsl(${Math.random()*360},70%,60%)`;
-  b.style.animationDuration=(6+Math.random()*4)+'s'; balloonsContainer.appendChild(b);
+  let b=document.createElement('div'); b.className='balloon'; 
+  b.style.left=Math.random()*100+'%'; 
+  b.style.background=`hsl(${Math.random()*360},70%,70%)`; 
+  b.style.animationDuration=(6+Math.random()*4)+'s'; 
+  balloonsContainer.appendChild(b);
 }
 
 /* Page navigation */
@@ -89,20 +90,22 @@ function nextPage(next){
 
 /* Love Game */
 function loveAnswer(ans){
-  const msg = document.getElementById('loveMsg');
-  const nextBtn = document.getElementById('nextToMemory');
-  const noBtn = document.getElementById('noBtn');
+  const msg=document.getElementById('loveMsg');
+  const nextBtn=document.getElementById('nextToMemory');
+  const noBtn=document.getElementById('noBtn');
   if(ans==='yes'){
-    msg.textContent="I dare you to click No 😏"; msg.classList.add('fade-in');
+    msg.textContent="I dare you to click No 😏";
+    msg.classList.add('fade-in');
     noBtn.disabled=false;
   } else {
-    msg.textContent="Yes, behind No, I knew it ❤️"; msg.classList.add('fade-in');
+    msg.textContent="Yes, behind No, I knew it ❤️";
+    msg.classList.add('fade-in');
     nextBtn.classList.remove('hidden');
   }
 }
 
 /* Memory Page */
-const memoryLines = [
+const memoryLines=[
   "Do you remember that rainy day?",
   "You asked me about my crush...",
   "I couldn't say your name directly, but...",
@@ -110,40 +113,34 @@ const memoryLines = [
   "From that day till now, years have passed,",
   "But my feelings haven't changed.",
   "We've fought, we've threatened breakups,",
-  "But still, we're here, and my love is the same.",
+  "But still, we're here, and my love is the same."
 ];
 function openMemory(){
   document.getElementById('envelope').classList.add('hidden');
   const memoryDiv=document.getElementById('memoryText');
-  memoryDiv.classList.remove('hidden');
-  memoryDiv.innerHTML='';
+  memoryDiv.classList.remove('hidden'); memoryDiv.innerHTML='';
   let i=0;
   function showLine(){
     if(i<memoryLines.length){
       const p=document.createElement('p'); p.textContent=memoryLines[i]; p.className='letter-line fade-in';
-      memoryDiv.appendChild(p);
+      memoryDiv.appendChild(p); i++;
       setTimeout(showLine,1500);
-      i++;
-    } else {
-      document.getElementById('nextToTest').classList.remove('hidden');
-    }
+    } else {document.getElementById('nextToTest').classList.remove('hidden');}
   }
   showLine();
 }
 
 /* Questions */
-const questions = [
+const questions=[
   {q:"What makes time stop for me?", options:["Music","Sunset"], answer:"Your presence"},
   {q:"If happiness were a place, where would it be?", options:["Beach","Garden"], answer:"Next to you"},
   {q:"If love had a flavor, which would it taste like?", options:["Sweet","Bitter"], answer:"Just like you"},
-  {q:"If the strongest magic existed, what would it belong to?", options:["Black Magic","Ancient Spell"], answer:"Your eyes"},
+  {q:"Which magical force fascinates me most?", options:["Black Magic","Ancient Spell"], answer:"Your eyes"},
   {q:"What song plays on repeat in my mind?", options:["Rain","Silence"], answer:"Your sweet voice"},
-  {q:"Who attracts my attention most?", options:["Me","You"], answer:"Yes, of course you"},
+  {q:"Who attracts my attention most?", options:["Me","You"], answer:"Yes, of course you"}
 ];
-
 const questionContainer=document.getElementById('questionContainer');
 let currentQuestion=0;
-
 function showQuestion(){
   if(currentQuestion>=questions.length) return;
   questionContainer.innerHTML='';
@@ -163,7 +160,6 @@ function showAnswer(ans){
   setTimeout(showQuestion,1200);
 }
 showQuestion();
-
 </script>
 </body>
 </html>
