@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ammara</title>
 <style>
-    /* ---------- Fonts ---------- */
-    @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Roboto:wght@400;500;700&family=Quicksand:wght@500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@500;600&family=Roboto:wght@400;500;700&display=swap');
 
     body {
         margin: 0;
         padding: 0;
         font-family: 'Quicksand', sans-serif;
-        background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
         overflow: hidden;
+        background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -21,11 +20,11 @@
         color: #333;
     }
 
-    /* ---------- Decorations ---------- */
-    .balloon, .heart {
+    .decoration {
         position: absolute;
-        animation: float 6s infinite;
+        pointer-events: none;
         opacity: 0.7;
+        animation: float 10s infinite linear;
     }
 
     @keyframes float {
@@ -37,6 +36,7 @@
         width: 90%;
         max-width: 700px;
         text-align: center;
+        position: relative;
     }
 
     .page {
@@ -47,30 +47,11 @@
         animation: fadeIn 1s ease-in;
     }
 
-    @keyframes fadeIn {
-        from {opacity: 0;}
-        to {opacity: 1;}
-    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
-    h1, h2, h3 {
-        margin: 20px 0;
-    }
-
-    h1 {
-        font-family: 'Parisienne', cursive;
-        font-size: 3em;
-        color: #ff3399;
-    }
-
-    h2 {
-        font-size: 2em;
-        color: #ff66cc;
-    }
-
-    h3 {
-        font-size: 1.5em;
-        color: #ff85c1;
-    }
+    h1 { font-family: 'Parisienne', cursive; font-size:3em; color:#ff3399; }
+    h2 { font-size:2em; color:#ff66cc; }
+    h3 { font-size:1.5em; color:#ff85c1; }
 
     button {
         padding: 12px 25px;
@@ -85,35 +66,27 @@
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
+    button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-    .question, .answer {
-        font-size: 1.3em;
-        margin: 15px 0;
-    }
+    .question, .answer { font-size:1.3em; margin:15px 0; }
+    .answer { display:none; color:#990066; font-weight:bold; }
 
-    .answer {
-        display: none;
-        color: #990066;
-        font-weight: bold;
-    }
+    #memoryText { font-size:1.2em; line-height:1.6em; }
 
 </style>
 </head>
 <body>
 
-<!-- ---------- Decorations ---------- -->
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="balloon" style="left:10%;width:40px;">
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="balloon" style="left:50%;width:50px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="heart" style="left:30%;width:30px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="heart" style="left:70%;width:35px;">
+<!-- Decorations for all pages -->
+<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:10%;width:40px;">
+<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:50%;width:50px;">
+<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:30%;width:30px;">
+<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:70%;width:35px;">
+<img src="https://i.ibb.co/fC1sFbF/flower.png" class="decoration" style="left:80%;width:30px;">
 
 <div class="container">
 
-<!-- ---------- Page 1: Landing ---------- -->
+<!-- Page 1: Landing -->
 <div class="page" id="page1" style="display:flex;">
     <h1>Happy Birthday</h1>
     <h2>Ammara</h2>
@@ -121,7 +94,7 @@
     <button onclick="nextPage(2)">Open Surprise 🎉</button>
 </div>
 
-<!-- ---------- Page 2: Game Do You Still Love Me ---------- -->
+<!-- Page 2: Game -->
 <div class="page" id="page2">
     <h2>Do you still love me?</h2>
     <button id="yesBtn">Yes</button>
@@ -130,21 +103,21 @@
     <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
 </div>
 
-<!-- ---------- Page 3: Memory ---------- -->
+<!-- Page 3: Memory -->
 <div class="page" id="page3">
     <h2>Memories 🌧️</h2>
-    <p id="memoryText" style="font-size:1.2em; line-height:1.6em;"></p>
+    <p id="memoryText"></p>
     <button id="nextBtn3" style="display:none;" onclick="nextPage(4)">Next</button>
 </div>
 
-<!-- ---------- Page 4: Test Intro ---------- -->
+<!-- Page 4: Test Intro -->
 <div class="page" id="page4">
     <h2>Get Ready for a Little Test 📝</h2>
     <p>Click "I'm Ready" to start answering some fun questions!</p>
     <button onclick="startQuestions()">I'm Ready</button>
 </div>
 
-<!-- ---------- Page 5: Questions ---------- -->
+<!-- Page 5: Questions -->
 <div class="page" id="page5">
     <div id="questionContainer">
         <div class="question" id="questionText"></div>
@@ -155,7 +128,7 @@
     </div>
 </div>
 
-<!-- ---------- Page 6: Final Message ---------- -->
+<!-- Page 6: Final Message -->
 <div class="page" id="page6">
     <h2>🎉 Happy Birthday Ammara 🎉</h2>
     <p style="font-size:1.2em; line-height:1.6em;">
@@ -166,9 +139,8 @@
 <script>
     // ---------- Navigation ----------
     function nextPage(num) {
-        const pages = document.querySelectorAll('.page');
-        pages.forEach(p => p.style.display = 'none');
-        document.getElementById('page'+num).style.display = 'flex';
+        document.querySelectorAll('.page').forEach(p => p.style.display='none');
+        document.getElementById('page'+num).style.display='flex';
     }
 
     // ---------- Page 2 Game ----------
@@ -177,15 +149,15 @@
     const answerLove = document.getElementById('answerLove');
     const nextBtn2 = document.getElementById('nextBtn2');
 
-    yesBtn.onclick = function() {
-        answerLove.style.display = 'block';
-        answerLove.innerText = "I dare you to click on No 😏";
+    yesBtn.onclick = () => {
+        answerLove.style.display='block';
+        answerLove.innerText="I dare you to click on No 😏";
     }
 
-    noBtn.onclick = function() {
-        answerLove.style.display = 'block';
-        answerLove.innerText = "Yes behind No, I knew it! ❤️";
-        nextBtn2.style.display = 'inline-block';
+    noBtn.onclick = () => {
+        answerLove.style.display='block';
+        answerLove.innerText="Yes behind No, I knew it! ❤️";
+        nextBtn2.style.display='inline-block';
     }
 
     // ---------- Page 3 Memory ----------
@@ -205,62 +177,58 @@
         if(memIndex < memoryLines.length) {
             memoryText.innerHTML += memoryLines[memIndex]+"<br>";
             memIndex++;
-            setTimeout(showMemoryLine, 1500);
+            setTimeout(showMemoryLine, 1800);
         } else {
-            nextBtn3.style.display = 'inline-block';
+            nextBtn3.style.display='inline-block';
         }
     }
-    document.getElementById('page3').addEventListener('click', () => {
-        if(memIndex === 0) showMemoryLine();
+    window.addEventListener('load', () => {
+        if(document.getElementById('page3').style.display==='flex') showMemoryLine();
     });
 
     // ---------- Page 5 Questions ----------
     const questions = [
         {q:"What lights up my dark night?", opt1:"Your presence", opt2:"The moon", ans:"Your presence"},
         {q:"If happiness were a place, where would it be?", opt1:"Next to you", opt2:"Mountains", ans:"Next to you"},
-        {q:"If love had a flavor, which would it taste like?", opt1:"Only you", opt2:"Chocolate", ans:"Only you"},
+        {q:"If love had a flavor, which would it taste like?", opt1:"Just like you", opt2:"Chocolate", ans:"Just like you"},
         {q:"Which magic holds me spellbound?", opt1:"Your eyes", opt2:"Potion", ans:"Your eyes"},
         {q:"Which makes my time stop?", opt1:"You", opt2:"Sun", ans:"You"},
         {q:"Which captures my attention instantly?", opt1:"Me", opt2:"You", ans:"Yes, of course you"}
     ];
 
-    let qIndex = 0;
-    const questionText = document.getElementById('questionText');
-    const option1 = document.getElementById('option1');
-    const option2 = document.getElementById('option2');
-    const answerText = document.getElementById('answerText');
-    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    let qIndex=0;
+    const questionText=document.getElementById('questionText');
+    const option1=document.getElementById('option1');
+    const option2=document.getElementById('option2');
+    const answerText=document.getElementById('answerText');
+    const nextQuestionBtn=document.getElementById('nextQuestionBtn');
 
-    function startQuestions() {
+    function startQuestions(){
         nextPage(5);
         loadQuestion();
     }
 
-    function loadQuestion() {
-        answerText.style.display = 'none';
-        nextQuestionBtn.style.display = 'none';
-        questionText.innerText = questions[qIndex].q;
-        option1.innerText = questions[qIndex].opt1;
-        option2.innerText = questions[qIndex].opt2;
-        option1.onclick = checkAnswer;
-        option2.onclick = checkAnswer;
+    function loadQuestion(){
+        answerText.style.display='none';
+        nextQuestionBtn.style.display='none';
+        questionText.innerText=questions[qIndex].q;
+        option1.innerText=questions[qIndex].opt1;
+        option2.innerText=questions[qIndex].opt2;
+        option1.onclick=checkAnswer;
+        option2.onclick=checkAnswer;
     }
 
-    function checkAnswer() {
-        answerText.style.display = 'block';
-        answerText.innerText = questions[qIndex].ans;
-        nextQuestionBtn.style.display = 'inline-block';
+    function checkAnswer(){
+        answerText.style.display='block';
+        answerText.innerText=questions[qIndex].ans;
+        nextQuestionBtn.style.display='inline-block';
     }
 
-    nextQuestionBtn.onclick = function() {
+    nextQuestionBtn.onclick = function(){
         qIndex++;
-        if(qIndex < questions.length) {
-            loadQuestion();
-        } else {
-            nextPage(6);
-        }
+        if(qIndex<questions.length) loadQuestion();
+        else nextPage(6);
     }
-
 </script>
 
 </body>
