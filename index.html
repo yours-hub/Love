@@ -4,264 +4,165 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ammara</title>
-
-<!-- Google Fonts for cute fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab&family=Indie+Flower&display=swap" rel="stylesheet">
-
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&family=Indie+Flower&family=Sacramento&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    font-family: 'Roboto Slab', serif;
-    background: linear-gradient(to bottom, #fceaff, #ffd6e8);
-    overflow-x: hidden;
-  }
-
-  /* Landing Page */
-  #landing {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-  }
-
-  #landing h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 60px;
-    color: #ff4d6d;
-    margin: 0;
-  }
-
-  #landing h2 {
-    font-family: 'Indie Flower', cursive;
-    font-size: 40px;
-    color: #ff77a9;
-    margin: 10px 0 30px 0;
-  }
-
-  .button {
-    background-color: #ff8fc1;
-    border: none;
-    padding: 15px 35px;
-    font-size: 24px;
-    border-radius: 12px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
-  }
-
-  .button:hover {
-    transform: scale(1.1);
-    background-color: #ff4d6d;
-  }
-
-  /* Section hidden by default */
-  section {
-    display: none;
-    padding: 40px;
-    min-height: 100vh;
-  }
-
-  /* Yes/No Game */
-  .game-button {
-    background-color: #ffd6e8;
-    border: none;
-    padding: 12px 25px;
-    font-size: 20px;
-    border-radius: 10px;
-    margin: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .game-button:hover {
-    transform: scale(1.1);
-    background-color: #ff77a9;
-    color: white;
-  }
-
-  #game-text, #memory-text, #question-text, #answer-text {
-    font-size: 24px;
-    color: #4d1a35;
-    margin: 20px 0;
-  }
-
-  /* Animations for letters */
-  .letter {
-    display: inline-block;
-    opacity: 0;
-    animation: appear 0.5s forwards;
-  }
-
-  @keyframes appear {
-    to {opacity: 1;}
-  }
-
-  /* Popups */
-  .popup {
-    background-color: #fff0f5;
-    border: 2px solid #ff77a9;
-    padding: 15px 25px;
-    border-radius: 15px;
-    font-family: 'Indie Flower', cursive;
-    font-size: 22px;
-    color: #ff4d6d;
-    display: inline-block;
-    margin: 15px 0;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.5s ease;
-  }
-  .popup.show {
-    opacity: 1;
-    transform: scale(1);
-  }
-
+  /* Reset and general styles */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Indie Flower', cursive; overflow-x:hidden; background: #ffe6f0; color: #333; }
+  .center { display:flex; justify-content:center; align-items:center; flex-direction:column; min-height:100vh; text-align:center; }
+  h1,h2,h3,p { margin:10px 0; }
+  button { padding: 12px 25px; border:none; border-radius:10px; cursor:pointer; font-family: 'Sacramento', cursive; font-size:1.2em; background:#ff99cc; color:white; transition:all 0.3s ease; }
+  button:hover { background:#ff66aa; transform:scale(1.1); }
+  .hidden { display:none; opacity:0; transition: opacity 0.8s ease; }
+  .fade-in { opacity:1; transition: opacity 1s ease; }
+  /* Background animations */
+  .balloons { position:absolute; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+  .balloon { position:absolute; bottom:-100px; width:50px; height:70px; background:red; border-radius:50% 50% 50% 50%; animation: rise 8s linear infinite; }
+  @keyframes rise { 0%{transform:translateY(0) rotate(0deg);} 100%{transform:translateY(-110vh) rotate(360deg);} }
+  .rain { position:absolute; width:2px; height:15px; background:lightblue; animation: fall 1s linear infinite; opacity:0.7; }
+  @keyframes fall { 0%{top:-10px;} 100%{top:100vh;} }
+  /* Page styling */
+  .page { position:absolute; width:100%; height:100%; top:0; left:0; background:transparent; display:none; flex-direction:column; justify-content:center; align-items:center; padding:20px; }
+  .active { display:flex; }
+  .letter-line { font-family:'Great Vibes', cursive; font-size:1.4em; margin:5px 0; opacity:0; transition:opacity 1s ease; }
+  .question { font-family:'Pacifico', cursive; font-size:1.3em; margin:15px 0; }
+  .answer-btn { margin:8px; }
 </style>
 </head>
 <body>
 
+<!-- Balloons -->
+<div class="balloons" id="balloons"></div>
+
 <!-- Landing Page -->
-<section id="landing">
-  <h1>Happy Birthday</h1>
-  <h2 id="nameHere">Ammara</h2>
-  <button class="button" onclick="startGame()">Open Surprise 🎁</button>
-</section>
+<div class="page active" id="landing">
+  <h1 style="font-size:4em; color:#ff3399;">Happy Birthday</h1>
+  <h2 style="font-family:'Sacramento',cursive; font-size:3em; color:#ff66cc;">Ammara</h2>
+  <h3 style="color:#ff66cc;">6th March</h3>
+  <button onclick="nextPage('loveGame')">Open Surprise 🎁</button>
+</div>
 
 <!-- Do You Still Love Me Game -->
-<section id="game">
-  <div id="game-text">Do you still love me?</div>
-  <button class="game-button" onclick="answerYes()">Yes</button>
-  <button class="game-button" onclick="answerNo()">No</button>
-  <div id="game-popup" class="popup"></div>
-  <br>
-  <button class="button" id="game-next" onclick="showMemory()" style="display:none;">Next ➡️</button>
-</section>
+<div class="page" id="loveGame">
+  <h2>Do you still love me?</h2>
+  <button class="answer-btn" onclick="loveAnswer('yes')">Yes</button>
+  <button class="answer-btn" id="noBtn" onclick="loveAnswer('no')">No</button>
+  <p id="loveMsg" class="fade-in" style="margin-top:20px;"></p>
+  <button id="nextToMemory" class="hidden" onclick="nextPage('memory')">Next</button>
+</div>
 
 <!-- Memory Page -->
-<section id="memory" style="background: url('https://images.unsplash.com/photo-1508610048659-a06b669e9d16?fit=crop&w=1470&q=80') no-repeat center center/cover;">
-  <div id="memory-text"></div>
-  <button class="button" id="memory-next" onclick="showTestIntro()" style="display:none;">Next ➡️</button>
-</section>
+<div class="page" id="memory">
+  <div id="envelope" style="cursor:pointer;">
+    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="100" alt="Envelope"><br>
+    <button onclick="openMemory()">Open Letter</button>
+  </div>
+  <div id="memoryText" class="hidden"></div>
+  <button id="nextToTest" class="hidden" onclick="nextPage('testIntro')">Next</button>
+</div>
 
-<!-- Test Intro -->
-<section id="testIntro" style="background-color:#ffe6f0; text-align:center;">
-  <div id="test-text" class="popup show">Now you’ll be put to a little test 😉. Ready?</div>
-  <button class="button" onclick="startQuestions()">Yes ❤️</button>
-</section>
+<!-- Test Intro Page -->
+<div class="page" id="testIntro">
+  <h2>Now you’ll be put into a fun test! Are you ready?</h2>
+  <button onclick="nextPage('questions')">Yes</button>
+</div>
 
-<!-- Questions -->
-<section id="questions">
-  <div id="question-text"></div>
-  <button class="game-button" id="option1"></button>
-  <button class="game-button" id="option2"></button>
-  <div id="answer-text" class="popup"></div>
-  <br>
-  <button class="button" id="next-question" onclick="nextQuestion()" style="display:none;">Next ➡️</button>
-</section>
+<!-- Questions Page -->
+<div class="page" id="questions">
+  <div id="questionContainer"></div>
+</div>
 
 <script>
-  // Game Logic
-  let gameClickedYes = false;
-  function startGame(){
-    document.getElementById('landing').style.display='none';
-    document.getElementById('game').style.display='block';
-  }
+/* Balloon animation generator */
+const balloonsContainer = document.getElementById('balloons');
+for(let i=0;i<15;i++){
+  let b=document.createElement('div'); b.className='balloon'; b.style.left=Math.random()*100+'%'; b.style.background=`hsl(${Math.random()*360},70%,60%)`;
+  b.style.animationDuration=(6+Math.random()*4)+'s'; balloonsContainer.appendChild(b);
+}
 
-  function answerYes(){
-    const popup = document.getElementById('game-popup');
-    if(!gameClickedYes){
-      popup.innerText = "I dare you to click on No 😏";
-      popup.classList.add('show');
-      gameClickedYes = true;
+/* Page navigation */
+function nextPage(next){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(next).classList.add('active');
+}
+
+/* Love Game */
+function loveAnswer(ans){
+  const msg = document.getElementById('loveMsg');
+  const nextBtn = document.getElementById('nextToMemory');
+  const noBtn = document.getElementById('noBtn');
+  if(ans==='yes'){
+    msg.textContent="I dare you to click No 😏"; msg.classList.add('fade-in');
+    noBtn.disabled=false;
+  } else {
+    msg.textContent="Yes, behind No, I knew it ❤️"; msg.classList.add('fade-in');
+    nextBtn.classList.remove('hidden');
+  }
+}
+
+/* Memory Page */
+const memoryLines = [
+  "Do you remember that rainy day?",
+  "You asked me about my crush...",
+  "I couldn't say your name directly, but...",
+  "I secretly told you that you were the one I loved.",
+  "From that day till now, years have passed,",
+  "But my feelings haven't changed.",
+  "We've fought, we've threatened breakups,",
+  "But still, we're here, and my love is the same.",
+];
+function openMemory(){
+  document.getElementById('envelope').classList.add('hidden');
+  const memoryDiv=document.getElementById('memoryText');
+  memoryDiv.classList.remove('hidden');
+  memoryDiv.innerHTML='';
+  let i=0;
+  function showLine(){
+    if(i<memoryLines.length){
+      const p=document.createElement('p'); p.textContent=memoryLines[i]; p.className='letter-line fade-in';
+      memoryDiv.appendChild(p);
+      setTimeout(showLine,1500);
+      i++;
     } else {
-      popup.innerText = "You knew it 😘";
-      popup.classList.add('show');
-      document.getElementById('game-next').style.display='inline-block';
+      document.getElementById('nextToTest').classList.remove('hidden');
     }
   }
+  showLine();
+}
 
-  function answerNo(){
-    const popup = document.getElementById('game-popup');
-    popup.innerText = "Yes behind No ❤️ I knew it!";
-    popup.classList.add('show');
-    document.getElementById('game-next').style.display='inline-block';
-  }
+/* Questions */
+const questions = [
+  {q:"What makes time stop for me?", options:["Music","Sunset"], answer:"Your presence"},
+  {q:"If happiness were a place, where would it be?", options:["Beach","Garden"], answer:"Next to you"},
+  {q:"If love had a flavor, which would it taste like?", options:["Sweet","Bitter"], answer:"Just like you"},
+  {q:"If the strongest magic existed, what would it belong to?", options:["Black Magic","Ancient Spell"], answer:"Your eyes"},
+  {q:"What song plays on repeat in my mind?", options:["Rain","Silence"], answer:"Your sweet voice"},
+  {q:"Who attracts my attention most?", options:["Me","You"], answer:"Yes, of course you"},
+];
 
-  // Memory Page Logic
-  function showMemory(){
-    document.getElementById('game').style.display='none';
-    document.getElementById('memory').style.display='block';
-    const text = "From that rainy day to today, my feelings for you have only grown. I always want you by my side.";
-    let i = 0;
-    const memoryText = document.getElementById('memory-text');
-    function showLetter(){
-      if(i<text.length){
-        const span = document.createElement('span');
-        span.classList.add('letter');
-        span.innerText = text[i];
-        memoryText.appendChild(span);
-        i++;
-        setTimeout(showLetter,50);
-      } else {
-        document.getElementById('memory-next').style.display='inline-block';
-      }
-    }
-    showLetter();
-  }
+const questionContainer=document.getElementById('questionContainer');
+let currentQuestion=0;
 
-  // Questions Logic
-  const questions = [
-    {q:"What makes time stop for me?", a:"Your laughter", options:["Sun","Moon"]},
-    {q:"If happiness were a place, where would it be?", a:"Your heart", options:["Sun","Moon"]},
-    {q:"If love had a flavor, which would it taste like?", a:"Chocolate rose", options:["Chocolate","Vanilla"]},
-    {q:"Which makes me smile instantly?", a:"Your smile", options:["Cat","Dog"]},
-    {q:"Which song plays in my mind?", a:"Your voice", options:["Song1","Song2"]},
-    {q:"What is the light of my night?", a:"Your presence", options:["Stars","Moon"]}
-  ];
-
-  let currentQ = 0;
-
-  function showTestIntro(){
-    document.getElementById('memory').style.display='none';
-    document.getElementById('testIntro').style.display='block';
-  }
-
-  function startQuestions(){
-    document.getElementById('testIntro').style.display='none';
-    document.getElementById('questions').style.display='block';
-    showQuestion();
-  }
-
-  function showQuestion(){
-    const q = questions[currentQ];
-    document.getElementById('question-text').innerText = q.q;
-    document.getElementById('option1').innerText = q.options[0];
-    document.getElementById('option2').innerText = q.options[1];
-    document.getElementById('answer-text').classList.remove('show');
-    document.getElementById('next-question').style.display='none';
-  }
-
-  document.getElementById('option1').addEventListener('click',showAnswer);
-  document.getElementById('option2').addEventListener('click',showAnswer);
-
-  function showAnswer(){
-    const q = questions[currentQ];
-    const answerText = document.getElementById('answer-text');
-    answerText.innerText = q.a;
-    answerText.classList.add('show');
-    document.getElementById('next-question').style.display='inline-block';
-  }
-
-  function nextQuestion(){
-    currentQ++;
-    if(currentQ<questions.length){
-      showQuestion();
-    } else {
-      alert("All questions done! 💖");
-    }
-  }
+function showQuestion(){
+  if(currentQuestion>=questions.length) return;
+  questionContainer.innerHTML='';
+  const q=questions[currentQuestion];
+  const h=document.createElement('h2'); h.textContent=q.q; h.className='question fade-in';
+  questionContainer.appendChild(h);
+  q.options.forEach(opt=>{
+    const btn=document.createElement('button'); btn.textContent=opt; btn.className='answer-btn';
+    btn.onclick=()=>showAnswer(q.answer);
+    questionContainer.appendChild(btn);
+  });
+}
+function showAnswer(ans){
+  const p=document.createElement('p'); p.textContent=ans; p.className='letter-line fade-in';
+  questionContainer.appendChild(p);
+  currentQuestion++;
+  setTimeout(showQuestion,1200);
+}
+showQuestion();
 
 </script>
 </body>
