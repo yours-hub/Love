@@ -4,56 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Ammara</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Roboto+Slab&family=Quicksand&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
 <style>
-  /* General Reset */
-  * {margin:0; padding:0; box-sizing:border-box;}
-  body, html {height:100%; font-family: 'Quicksand', sans-serif; overflow-x:hidden;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body, html{height:100%; font-family:'Quicksand',sans-serif; overflow-x:hidden; transition:0.5s;}
 
-  /* Backgrounds & Sections */
-  .section {width:100%; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; color:white; text-align:center; padding:20px;}
-  .celebration {background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb); overflow:hidden;}
-  .playful {background: linear-gradient(135deg, #a18cd1, #fbc2eb, #fad0c4); overflow:hidden;}
-  .rainy {background: url('https://i.ibb.co/5RZ1XqK/rain-bg.jpg') center/cover no-repeat; color:#fff;}
-  .question-vibe {background: linear-gradient(135deg, #fbc2eb, #a6c1ee); overflow:hidden;}
-  
-  /* Floating Hearts/Balloons */
-  .heart, .balloon {
-    position:absolute; width:20px; height:20px; background:red; border-radius:50%; animation: float 10s linear infinite;
-  }
-  @keyframes float {0% {transform:translateY(100vh) rotate(0deg);} 100% {transform:translateY(-10vh) rotate(360deg);}}
-  
-  /* Text Styles */
-  .main-title {font-family:'Pacifico', cursive; font-size:4vw; margin-bottom:10px;}
-  .name-title {font-family:'Dancing Script', cursive; font-size:3vw; color:#ffe4e1; margin-bottom:30px;}
-  .button {padding:15px 30px; font-size:1.5vw; border:none; border-radius:15px; cursor:pointer; background: #ff8da2; color:#fff; font-family:'Quicksand', sans-serif; transition:0.3s;}
-  .button:hover {background:#ff6f91; transform:scale(1.1);}
-  
-  /* Pop-up answer */
-  .answer-popup {position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background: rgba(0,0,0,0.7); padding:20px 40px; border-radius:20px; font-size:2vw; display:none; animation: pop 0.5s ease;}
-  @keyframes pop {0%{transform:translate(-50%,-50%) scale(0);} 100%{transform:translate(-50%,-50%) scale(1);}}
-  
-  /* Question Buttons */
-  .option-btn {padding:10px 20px; font-size:1.5vw; margin:10px; border-radius:15px; border:none; cursor:pointer; transition:0.3s; background:#ff6f91; color:white; font-family:'Quicksand', sans-serif;}
-  .option-btn:hover {background:#ff4c70; transform:scale(1.1);}
-  
-  /* Fade in/out */
-  .hidden {display:none;}
-  .fade-in {animation: fadeIn 1s ease forwards;}
-  @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
-  
-  /* Typing text effect */
-  .typing {border-right: .15em solid #fff; white-space: nowrap; overflow: hidden;}
+/* Sections */
+.section{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;position:relative;opacity:0; transition:opacity 1s ease;}
+.show{opacity:1;}
+
+/* Backgrounds */
+.celebration{background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);}
+.playful{background:linear-gradient(135deg,#a18cd1,#fbc2eb,#fad0c4);}
+.rainy{background:url('https://i.ibb.co/5RZ1XqK/rain-bg.jpg') center/cover no-repeat;}
+.question-vibe{background:linear-gradient(135deg,#fbc2eb,#a6c1ee);}
+
+/* Floating hearts/balls */
+.heart{position:absolute;width:20px;height:20px;border-radius:50%;animation:float 10s linear infinite;pointer-events:none;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0deg);}100%{transform:translateY(-10vh) rotate(360deg);}}
+
+/* Titles & Text */
+.main-title{font-family:'Pacifico',cursive;font-size:6vw;margin-bottom:10px;opacity:0; transform:scale(0.8); transition:0.8s;}
+.name-title{font-family:'Dancing Script',cursive;font-size:4vw;color:#ffe4e1;margin-bottom:30px;opacity:0; transform:scale(0.8); transition:0.8s;}
+.button, .option-btn{padding:12px 25px;font-size:1.5vw;border:none;border-radius:15px;cursor:pointer;transition:0.3s;outline:none;}
+.button{background:#ff8da2;color:#fff;}
+.button:hover{transform:scale(1.1);background:#ff6f91;}
+.option-btn{background:#ff6f91;color:white;margin:10px;}
+.option-btn:hover{background:#ff4c70;transform:scale(1.1);}
+.answer-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,192,203,0.95);padding:20px 40px;border-radius:20px;font-size:2vw;display:none;color:#000;animation:popUp 0.5s;}
+@keyframes popUp{0%{transform:translate(-50%,-50%) scale(0);}100%{transform:translate(-50%,-50%) scale(1);}}
+.typing{border-right:.15em solid #fff;white-space:nowrap;overflow:hidden;font-size:2vw;text-align:center;}
+
+/* Animations for titles/buttons */
+.fadeIn{opacity:1 !important; transform:scale(1) !important;}
+.pulse{animation:pulseBtn 1s infinite;}
+@keyframes pulseBtn{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 </style>
 </head>
 <body>
 
 <!-- Landing Page -->
-<div class="section celebration" id="landing">
-  <div class="main-title">Happy Birthday</div>
-  <div class="name-title">Ammara ❤</div>
-  <button class="button" onclick="startGame()">Open Surprise</button>
+<div class="section celebration show" id="landing">
+  <div class="main-title" id="hbTitle">Happy Birthday</div>
+  <div class="name-title" id="nameTitle">Ammara ❤</div>
+  <button class="button pulse" onclick="startGame()">Open Surprise</button>
 </div>
 
 <!-- Do You Still Love Me Game -->
@@ -61,12 +56,19 @@
   <div class="main-title">Do you still love me?</div>
   <button class="option-btn" onclick="loveClick('yes')">Yes 😘</button>
   <button class="option-btn" id="noBtn" onclick="loveClick('no')">No 😏</button>
+  <button class="button hidden" id="nextLove" onclick="startRainMemory()">Next</button>
 </div>
 
 <!-- Rainy Memory Section -->
 <div class="section rainy hidden" id="rainMemory">
-  <div class="main-title typing" id="memoryText"></div>
-  <button class="button hidden" id="nextMemory" onclick="showQuestions()">Next</button>
+  <div class="typing" id="memoryText"></div>
+  <button class="button hidden" id="nextMemory" onclick="showPreQuestions()">Next</button>
+</div>
+
+<!-- Pre-Questions -->
+<div class="section playful hidden" id="preQuestions">
+  <div class="main-title">Get ready for some fun tests! 😘</div>
+  <button class="button pulse" onclick="startQuestions()">I'm Ready</button>
 </div>
 
 <!-- Questions Section -->
@@ -79,22 +81,28 @@
   <button class="button hidden" id="nextQuestion" onclick="nextQuestion()">Next</button>
 </div>
 
-<!-- Answer Popup -->
 <div class="answer-popup" id="answerPopup"></div>
 
 <script>
 // Floating hearts
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
   let heart=document.createElement('div');
   heart.className='heart';
   heart.style.left=Math.random()*100+'vw';
   heart.style.background='hsl('+Math.random()*360+',70%,60%)';
+  heart.style.width=(10+Math.random()*20)+'px';
+  heart.style.height=(10+Math.random()*20)+'px';
+  heart.style.animationDuration=(5+Math.random()*10)+'s';
   document.body.appendChild(heart);
 }
 
-// Game Logic
+// Memory Lines
+const memoryLines=["I still remember our first secret in the rain…","Years have passed, my feelings stay the same…","I want you as my life partner…"];
+let lineIndex=0;
+
+// Questions
 let currentQuestion=0;
-const questions = [
+const questions=[
   {q:"What makes time stop for me?", opts:["Sunset 🌅","Song 🎵"], ans:"Just your presence 😌"},
   {q:"If happiness were a place, where would it be?", opts:["Beach 🏖","Mountains ⛰"], ans:"Beside you always ❤️"},
   {q:"If love had a flavor, which would it taste like?", opts:["Chocolate 🍫","Honey 🍯"], ans:"Just you 😘"},
@@ -103,50 +111,70 @@ const questions = [
   {q:"Who wins my attention instantly?", opts:["You 😉","Me 🤔"], ans:"You, of course 😏"}
 ];
 
+// Start Game
 function startGame(){
+  document.getElementById('landing').classList.remove('show');
   document.getElementById('landing').classList.add('hidden');
-  document.getElementById('loveGame').classList.remove('hidden');
+  let lg=document.getElementById('loveGame');
+  lg.classList.remove('hidden');
+  setTimeout(()=>{lg.classList.add('show');},50);
 }
 
-// Do You Still Love Me Game
+// Love Game
 function loveClick(choice){
-  let yesBtn=document.querySelector("#loveGame button:nth-child(2)");
-  if(choice==='no'){document.getElementById('noBtn').innerText='Yes 😘';}
-  alert(choice==='yes' ? "I dare you to click No 😏" : "I knew it, you love me 😘");
-  document.getElementById('loveGame').classList.add('hidden');
-  startRainMemory();
+  let noBtn=document.getElementById('noBtn');
+  if(choice==='yes'){showPopup("I dare you to click No 😏"); noBtn.innerText='No 😏';}
+  else{noBtn.innerText='Yes 😘'; showPopup("Yes behind No 😘 I knew it!");}
+  document.getElementById('nextLove').classList.remove('hidden');
+}
+
+// Popup function
+function showPopup(text){
+  let popup=document.getElementById('answerPopup');
+  popup.innerText=text;
+  popup.style.display='block';
+  setTimeout(()=>{popup.style.display='none';},1500);
 }
 
 // Rainy Memory
-const memoryLines=["I still remember our first secret in the rain…","Years have passed, my feelings stay the same…","I want you as my life partner…"];
-let lineIndex=0;
-
 function startRainMemory(){
-  document.getElementById('rainMemory').classList.remove('hidden');
-  showMemoryLine();
+  document.getElementById('loveGame').classList.remove('show');
+  document.getElementById('loveGame').classList.add('hidden');
+  let rm=document.getElementById('rainMemory');
+  rm.classList.remove('hidden');
+  setTimeout(()=>{rm.classList.add('show'); showMemoryLine();},50);
 }
 
 function showMemoryLine(){
   if(lineIndex<memoryLines.length){
     let textEl=document.getElementById('memoryText');
-    textEl.textContent='';
     let line=memoryLines[lineIndex];
     let i=0;
-    function type(){
-      if(i<line.length){textEl.textContent+=line.charAt(i); i++; setTimeout(type,50);}
-      else {lineIndex++; if(lineIndex<memoryLines.length){setTimeout(showMemoryLine,700);}
-            else{document.getElementById('nextMemory').classList.remove('hidden');}}
+    function type(){if(i<line.length){textEl.textContent+=line.charAt(i); i++; setTimeout(type,50);}
+      else{lineIndex++; textEl.textContent+='\n'; setTimeout(showMemoryLine,700);}
     } type();
-  }
+  } else{document.getElementById('nextMemory').classList.remove('hidden');}
 }
 
-// Questions Section
-function showQuestions(){
+// Pre-Questions
+function showPreQuestions(){
+  document.getElementById('rainMemory').classList.remove('show');
   document.getElementById('rainMemory').classList.add('hidden');
-  document.getElementById('questionsSection').classList.remove('hidden');
-  loadQuestion();
+  let pq=document.getElementById('preQuestions');
+  pq.classList.remove('hidden');
+  setTimeout(()=>{pq.classList.add('show');},50);
 }
 
+// Start Questions
+function startQuestions(){
+  document.getElementById('preQuestions').classList.remove('show');
+  document.getElementById('preQuestions').classList.add('hidden');
+  let qs=document.getElementById('questionsSection');
+  qs.classList.remove('hidden');
+  setTimeout(()=>{qs.classList.add('show'); loadQuestion();},50);
+}
+
+// Questions Logic
 function loadQuestion(){
   document.getElementById('questionText').innerText=questions[currentQuestion].q;
   document.getElementById('option1').innerText=questions[currentQuestion].opts[0];
@@ -155,16 +183,14 @@ function loadQuestion(){
 }
 
 function answerClick(idx){
-  let popup=document.getElementById('answerPopup');
-  popup.innerText=questions[currentQuestion].ans;
-  popup.style.display='block';
-  setTimeout(()=>{popup.style.display='none'; document.getElementById('nextQuestion').classList.remove('hidden');},1500);
+  showPopup(questions[currentQuestion].ans);
+  setTimeout(()=>{document.getElementById('nextQuestion').classList.remove('hidden');},1500);
 }
 
 function nextQuestion(){
   currentQuestion++;
   if(currentQuestion<questions.length){loadQuestion();}
-  else {alert("🎉 All questions completed! More surprises coming soon! 🎉");}
+  else{alert("🎉 All questions completed! More surprises coming soon! 🎉");}
 }
 </script>
 </body>
