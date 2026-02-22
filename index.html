@@ -3,233 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Ammara</title>
+<title>Birthday Surprise for Ammara</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@500;600&family=Roboto:wght@400;500;700&display=swap');
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Great+Vibes&family=Kaushan+Script&display=swap');
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Quicksand', sans-serif;
-        overflow: hidden;
-        background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #333;
-    }
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #fff0e6);
+    overflow: hidden;
+    color: #333;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.active { display: flex !important; }
+h1 { margin: 10px 0; }
+button {
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #ff6b81, #f7d794);
+    color: white;
+    transition: all 0.3s ease;
+}
+button:hover { transform: scale(1.1); }
+.fade { animation: fadeIn 1s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
 
-    .decoration {
-        position: absolute;
-        pointer-events: none;
-        opacity: 0.7;
-        animation: float 10s infinite linear;
-    }
+/* Floating decorations */
+.floating {
+    position: absolute;
+    z-index: 0;
+    animation: floatAnim 8s infinite linear;
+    opacity: 0.8;
+}
+@keyframes floatAnim {
+    0% { transform: translateY(0) rotate(0deg);}
+    50% { transform: translateY(-50px) rotate(180deg);}
+    100% { transform: translateY(0) rotate(360deg);}
+}
 
-    @keyframes float {
-        0% { transform: translateY(100vh) rotate(0deg);}
-        100% { transform: translateY(-20vh) rotate(360deg);}
-    }
+/* Specific styles for texts */
+.landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
+.landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
+.memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
+.question h2 { font-family: 'Roboto', sans-serif; font-size: 1.8rem; margin-bottom: 20px; }
+.question button { margin: 5px; }
 
-    .container {
-        width: 90%;
-        max-width: 700px;
-        text-align: center;
-        position: relative;
-    }
+/* Answer popups */
+.answer-popup {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff6b81;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    display: none;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+    animation: popupFade 0.5s ease forwards;
+}
+@keyframes popupFade { from {opacity:0; transform:translate(-50%,-40%);} to {opacity:1; transform:translate(-50%,-50%);} }
 
-    .page {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 1s ease-in;
-    }
+/* Final page */
+.final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; }
+.final p { font-family: 'Roboto', sans-serif; font-size: 1.3rem; line-height: 2rem; color:#2f3542; }
 
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-
-    h1 { font-family: 'Parisienne', cursive; font-size:3em; color:#ff3399; }
-    h2 { font-size:2em; color:#ff66cc; }
-    h3 { font-size:1.5em; color:#ff85c1; }
-
-    button {
-        padding: 12px 25px;
-        margin: 15px;
-        font-family: 'Quicksand', sans-serif;
-        font-size: 1.2em;
-        border-radius: 20px;
-        border: none;
-        cursor: pointer;
-        background: linear-gradient(45deg, #ff99cc, #ff66ff);
-        color: white;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-
-    .question, .answer { font-size:1.3em; margin:15px 0; }
-    .answer { display:none; color:#990066; font-weight:bold; }
-
-    #memoryText { font-size:1.2em; line-height:1.6em; }
-
+/* Center content vertically */
+.centered { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
 </style>
 </head>
 <body>
 
-<!-- Decorations for all pages -->
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:10%;width:40px;">
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:50%;width:50px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:30%;width:30px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:70%;width:35px;">
-<img src="https://i.ibb.co/fC1sFbF/flower.png" class="decoration" style="left:80%;width:30px;">
-
-<div class="container">
-
-<!-- Page 1: Landing -->
-<div class="page" id="page1" style="display:flex;">
-    <h1>Happy Birthday</h1>
-    <h2>Ammara</h2>
-    <h3>6th March</h3>
-    <button onclick="nextPage(2)">Open Surprise 🎉</button>
+<!-- Landing Page -->
+<div class="container landing active" id="page1">
+    <div class="centered fade">
+        <h1>Happy Birthday</h1>
+        <h2>Ammara</h2>
+        <h3>6th March</h3>
+        <button onclick="nextPage(2)">Open Surprise 🎉</button>
+    </div>
+    <!-- Decorations -->
+    <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:10%; left:15%; width:40px;">
+    <img src="https://i.postimg.cc/Zq4Xw7mH/balloon.png" class="floating" style="top:20%; left:70%; width:50px;">
 </div>
 
-<!-- Page 2: Game -->
-<div class="page" id="page2">
-    <h2>Do you still love me?</h2>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-    <div class="answer" id="answerLove"></div>
-    <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
-</div>
-
-<!-- Page 3: Memory -->
-<div class="page" id="page3">
-    <h2>Memories 🌧️</h2>
-    <p id="memoryText"></p>
-    <button id="nextBtn3" style="display:none;" onclick="nextPage(4)">Next</button>
-</div>
-
-<!-- Page 4: Test Intro -->
-<div class="page" id="page4">
-    <h2>Get Ready for a Little Test 📝</h2>
-    <p>Click "I'm Ready" to start answering some fun questions!</p>
-    <button onclick="startQuestions()">I'm Ready</button>
-</div>
-
-<!-- Page 5: Questions -->
-<div class="page" id="page5">
-    <div id="questionContainer">
-        <div class="question" id="questionText"></div>
-        <button id="option1"></button>
-        <button id="option2"></button>
-        <div class="answer" id="answerText"></div>
-        <button id="nextQuestionBtn" style="display:none;">Next</button>
+<!-- First Game Page -->
+<div class="container landing" id="page2">
+    <div class="centered fade">
+        <h2>Do you still love me?</h2>
+        <button onclick="gameYes()">Yes</button>
+        <button onclick="gameNo()">No</button>
+        <div class="answer-popup" id="gameAnswer"></div>
+        <br><br>
+        <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
     </div>
 </div>
 
-<!-- Page 6: Final Message -->
-<div class="page" id="page6">
-    <h2>🎉 Happy Birthday Ammara 🎉</h2>
-    <p style="font-size:1.2em; line-height:1.6em;">
-        Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy.
-    </p>
+<!-- Memory Page -->
+<div class="container memory" id="page3">
+    <div class="centered fade">
+        <div id="memoryText"></div>
+        <button id="nextBtn3" style="display:none;" onclick="nextPage(4)">Next</button>
+    </div>
+</div>
+
+<!-- Test Intro Page -->
+<div class="container" id="page4">
+    <div class="centered fade">
+        <h2>Get Ready for the Test!</h2>
+        <button onclick="nextPage(5)">I'm Ready</button>
+    </div>
+</div>
+
+<!-- Questions Page -->
+<div class="container question" id="page5">
+    <div class="centered fade">
+        <h2 id="questionText"></h2>
+        <button id="option1" onclick="checkAnswer(1)"></button>
+        <button id="option2" onclick="checkAnswer(2)"></button>
+        <div class="answer-popup" id="answerPopup"></div>
+        <br><br>
+        <button id="nextQuestionBtn" style="display:none;" onclick="nextQuestion()">Next</button>
+    </div>
+</div>
+
+<!-- Final Page -->
+<div class="container final" id="page6">
+    <div class="centered fade">
+        <h2>🎉 Happy Birthday Ammara 🎉</h2>
+        <p>
+            Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy
+        </p>
+    </div>
 </div>
 
 <script>
-    // ---------- Navigation ----------
-    function nextPage(num) {
-        document.querySelectorAll('.page').forEach(p => p.style.display='none');
-        document.getElementById('page'+num).style.display='flex';
+/* Navigation */
+function nextPage(n) {
+    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+    document.getElementById('page'+n).classList.add('active');
+
+    if(n===3) startMemory();
+    if(n===5) startQuestion();
+}
+
+/* First Game Logic */
+function gameYes() {
+    const answer = document.getElementById('gameAnswer');
+    answer.innerText = "I dare you to click on No!";
+    answer.style.display = 'block';
+    document.getElementById('nextBtn2').style.display='inline-block';
+}
+function gameNo() {
+    const answer = document.getElementById('gameAnswer');
+    answer.innerText = "Yes! I knew it ❤️";
+    answer.style.display = 'block';
+    document.getElementById('nextBtn2').style.display='inline-block';
+}
+
+/* Memory Page Logic */
+const memoryLines = [
+"On that rainy day, you wanted to know about my crush.",
+"I could not tell your name directly, but hinted you were the one I loved the most.",
+"From that day till now, four to five years have passed,",
+"But my feelings for you haven't changed at all.",
+"After many fights and breakup threats,",
+"Still, here we are, and my heart is the same."
+];
+function startMemory() {
+    const memoryDiv = document.getElementById('memoryText');
+    memoryDiv.innerHTML='';
+    let i=0;
+    function showLine() {
+        if(i<memoryLines.length){
+            let p = document.createElement('p');
+            p.textContent = memoryLines[i];
+            memoryDiv.appendChild(p);
+            i++;
+            setTimeout(showLine, 1800);
+        } else { document.getElementById('nextBtn3').style.display='inline-block'; }
     }
+    showLine();
+}
 
-    // ---------- Page 2 Game ----------
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const answerLove = document.getElementById('answerLove');
-    const nextBtn2 = document.getElementById('nextBtn2');
-
-    yesBtn.onclick = () => {
-        answerLove.style.display='block';
-        answerLove.innerText="I dare you to click on No 😏";
-    }
-
-    noBtn.onclick = () => {
-        answerLove.style.display='block';
-        answerLove.innerText="Yes behind No, I knew it! ❤️";
-        nextBtn2.style.display='inline-block';
-    }
-
-    // ---------- Page 3 Memory ----------
-    const memoryText = document.getElementById('memoryText');
-    const nextBtn3 = document.getElementById('nextBtn3');
-    const memoryLines = [
-        "On that rainy day, you wanted to know about my crush.",
-        "I could not tell your name directly, but hinted you were the one I loved the most.",
-        "From that day till now, four to five years have passed,",
-        "But my feelings for you haven't changed at all.",
-        "After many fights and breakup threats,",
-        "Still, here we are, and my heart is the same."
-    ];
-
-    let memIndex = 0;
-    function showMemoryLine() {
-        if(memIndex < memoryLines.length) {
-            memoryText.innerHTML += memoryLines[memIndex]+"<br>";
-            memIndex++;
-            setTimeout(showMemoryLine, 1800);
-        } else {
-            nextBtn3.style.display='inline-block';
-        }
-    }
-    window.addEventListener('load', () => {
-        if(document.getElementById('page3').style.display==='flex') showMemoryLine();
-    });
-
-    // ---------- Page 5 Questions ----------
-    const questions = [
-        {q:"What lights up my dark night?", opt1:"Your presence", opt2:"The moon", ans:"Your presence"},
-        {q:"If happiness were a place, where would it be?", opt1:"Next to you", opt2:"Mountains", ans:"Next to you"},
-        {q:"If love had a flavor, which would it taste like?", opt1:"Just like you", opt2:"Chocolate", ans:"Just like you"},
-        {q:"Which magic holds me spellbound?", opt1:"Your eyes", opt2:"Potion", ans:"Your eyes"},
-        {q:"Which makes my time stop?", opt1:"You", opt2:"Sun", ans:"You"},
-        {q:"Which captures my attention instantly?", opt1:"Me", opt2:"You", ans:"Yes, of course you"}
-    ];
-
-    let qIndex=0;
-    const questionText=document.getElementById('questionText');
-    const option1=document.getElementById('option1');
-    const option2=document.getElementById('option2');
-    const answerText=document.getElementById('answerText');
-    const nextQuestionBtn=document.getElementById('nextQuestionBtn');
-
-    function startQuestions(){
-        nextPage(5);
-        loadQuestion();
-    }
-
-    function loadQuestion(){
-        answerText.style.display='none';
-        nextQuestionBtn.style.display='none';
-        questionText.innerText=questions[qIndex].q;
-        option1.innerText=questions[qIndex].opt1;
-        option2.innerText=questions[qIndex].opt2;
-        option1.onclick=checkAnswer;
-        option2.onclick=checkAnswer;
-    }
-
-    function checkAnswer(){
-        answerText.style.display='block';
-        answerText.innerText=questions[qIndex].ans;
-        nextQuestionBtn.style.display='inline-block';
-    }
-
-    nextQuestionBtn.onclick = function(){
-        qIndex++;
-        if(qIndex<questions.length) loadQuestion();
-        else nextPage(6);
-    }
+/* Questions Page Logic */
+const questions = [
+    {q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
+    {q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
+    {q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
+    {q:"Which always makes me smile instantly?", o:["Joke","Music"], a:"Your eyes"},
+    {q:"What can black magic never control?", o:["Heart","Mind"], a:"Your eyes"},
+    {q:"Who has my full attention instantly?", o:["Me","You"], a:"Yes, of course you"}
+];
+let currentQ=0;
+function startQuestion() {
+    currentQ=0;
+    showQuestion();
+}
+function showQuestion() {
+    document.getElementById('questionText').innerText = questions[currentQ].q;
+    document.getElementById('option1').innerText = questions[currentQ].o[0];
+    document.getElementById('option2').innerText = questions[currentQ].o[1];
+    document.getElementById('answerPopup').style.display='none';
+    document.getElementById('nextQuestionBtn').style.display='none';
+}
+function checkAnswer(opt) {
+    const answerDiv = document.getElementById('answerPopup');
+    answerDiv.innerText = questions[currentQ].a;
+    answerDiv.style.display='block';
+    document.getElementById('nextQuestionBtn').style.display='inline-block';
+}
+function nextQuestion() {
+    currentQ++;
+    if(currentQ<questions.length) showQuestion();
+    else nextPage(6);
+}
 </script>
-
 </body>
 </html>
