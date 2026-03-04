@@ -7,6 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Great+Vibes&family=Kaushan+Script&display=swap');
 
+/* ===== Global Styles ===== */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -15,7 +16,7 @@ body {
     color: #333;
 }
 
-/* Page transition */
+/* ===== Container / Page Transition ===== */
 .container {
     width: 100%;
     height: 100vh;
@@ -34,7 +35,17 @@ body {
     transform: scale(1);
 }
 
-/* Buttons */
+/* ===== Centering ===== */
+.centered { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    width: 100%; 
+}
+
+/* ===== Buttons ===== */
 button {
     padding: 12px 28px;
     font-size: 1.2rem;
@@ -53,7 +64,7 @@ button:hover {
 }
 button:active { transform: scale(0.95); }
 
-/* Floating decorations */
+/* ===== Floating Decorations ===== */
 .floating {
     position: absolute;
     z-index: 0;
@@ -69,11 +80,11 @@ button:active { transform: scale(0.95); }
     100% { transform: translateY(0px) rotate(360deg) scale(1); }
 }
 
-/* Fade text */
+/* ===== Fade Text ===== */
 .fade { animation: fadeIn 1s ease forwards; opacity: 0; }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* Popup animation */
+/* ===== Answer Popup ===== */
 .answer-popup {
     position: absolute;
     top: 60%;
@@ -93,18 +104,18 @@ button:active { transform: scale(0.95); }
     to {opacity:1; transform:translate(-50%,-50%) scale(1);} 
 }
 
+/* ===== Section Fonts ===== */
 .landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
 .landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
 .memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
 .question h2 { font-family: 'Kaushan Script', cursive; font-size: 2rem; margin-bottom: 20px; color:#ff4757; }
-.question button { margin: 8px; background: linear-gradient(45deg,#ff9ff3,#ff6b81); color:white; font-size:1.2rem; }
+.question button { margin: 8px; background: linear-gradient(45deg,#ff9ff3,#ff6b81); color:white; font-size:1.2rem; border-radius:12px; }
 
+/* ===== Final Page ===== */
 .final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; text-shadow: 0 0 12px #ff9ff3;}
 .final p { font-size: 1.3rem; line-height: 2rem; color:#2f3542; }
 
-.centered { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
-
-/* Click heart animation */
+/* ===== Click Heart Animation ===== */
 @keyframes heartPop {
     0% { transform: translate(-50%, -50%) scale(0.5); opacity:1; }
     100% { transform: translate(-50%, -120px) scale(1.5); opacity:0; }
@@ -113,7 +124,7 @@ button:active { transform: scale(0.95); }
 </head>
 <body>
 
-<!-- Landing Page -->
+<!-- ===== Landing Page ===== -->
 <div class="container landing active" id="page1">
     <div class="centered fade">
         <h1>Happy Birthday</h1>
@@ -123,7 +134,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- First Game Page -->
+<!-- ===== First Game Page ===== -->
 <div class="container landing" id="page2">
     <div class="centered fade">
         <h2>Do you still love me?</h2>
@@ -135,7 +146,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Memory Page -->
+<!-- ===== Memory Page ===== -->
 <div class="container memory" id="page3">
     <div class="centered fade">
         <div id="memoryText"></div>
@@ -143,7 +154,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Test Intro Page -->
+<!-- ===== Test Intro Page ===== -->
 <div class="container" id="page4">
     <div class="centered fade">
         <h2>Get Ready for the Test!</h2>
@@ -151,7 +162,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Questions Page -->
+<!-- ===== Questions Page ===== -->
 <div class="container question" id="page5">
     <div class="centered fade">
         <h2 id="questionText"></h2>
@@ -163,7 +174,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Final Page -->
+<!-- ===== Final Page ===== -->
 <div class="container final" id="page6">
     <div class="centered fade">
         <h2>🎉 Happy Birthday Ammara 🎉</h2>
@@ -173,7 +184,7 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Floating Decorations -->
+<!-- ===== Floating Decorations ===== -->
 <script>
 function addFloatingDecorations() {
     const decoImgs = [
@@ -181,7 +192,7 @@ function addFloatingDecorations() {
         "https://i.postimg.cc/1Xsjm6KT/flower.png",
         "https://i.postimg.cc/3xw3m7v7/balloon.png"
     ];
-    for(let i=0;i<25;i++){
+    for(let i=0;i<30;i++){
         const img = document.createElement("img");
         img.src = decoImgs[Math.floor(Math.random()*decoImgs.length)];
         img.className = "floating";
@@ -194,7 +205,7 @@ function addFloatingDecorations() {
 }
 addFloatingDecorations();
 
-// Click heart animation
+// Click hearts
 document.addEventListener("click", function(e){
     const heart = document.createElement("div");
     heart.innerHTML = "❤️";
@@ -209,7 +220,7 @@ document.addEventListener("click", function(e){
 });
 </script>
 
-<!-- Navigation & Game/Memory/Questions Logic -->
+<!-- ===== Navigation + Game + Memory + Questions Logic ===== -->
 <script>
 function nextPage(n){
     document.querySelectorAll('.container').forEach(c=>c.classList.remove('active'));
