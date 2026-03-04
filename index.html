@@ -15,7 +15,7 @@ body {
     color: #333;
 }
 
-/* Smooth page transitions */
+/* Page transition */
 .container {
     width: 100%;
     height: 100vh;
@@ -40,11 +40,12 @@ button {
     font-size: 1.2rem;
     cursor: pointer;
     border: none;
-    border-radius: 14px;
+    border-radius: 16px;
     background: linear-gradient(45deg, #ff6b81, #ff9ff3);
     color: white;
     transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
+    font-family: 'Kaushan Script', cursive;
 }
 button:hover {
     transform: translateY(-4px) scale(1.08);
@@ -57,7 +58,7 @@ button:active { transform: scale(0.95); }
     position: absolute;
     z-index: 0;
     animation: floatAnim 12s ease-in-out infinite;
-    opacity: 0.8;
+    opacity: 0.85;
     pointer-events: none;
 }
 @keyframes floatAnim {
@@ -68,11 +69,11 @@ button:active { transform: scale(0.95); }
     100% { transform: translateY(0px) rotate(360deg) scale(1); }
 }
 
-/* Text fade */
+/* Fade text */
 .fade { animation: fadeIn 1s ease forwards; opacity: 0; }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* Popup */
+/* Popup animation */
 .answer-popup {
     position: absolute;
     top: 60%;
@@ -80,22 +81,25 @@ button:active { transform: scale(0.95); }
     transform: translate(-50%, -50%);
     background: #ff6b81;
     color: white;
-    padding: 12px 25px;
-    border-radius: 12px;
+    padding: 14px 28px;
+    border-radius: 14px;
     display: none;
     font-family: 'Roboto', sans-serif;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
     animation: popupFade 0.4s ease forwards;
 }
-@keyframes popupFade { from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} to {opacity:1; transform:translate(-50%,-50%) scale(1);} }
+@keyframes popupFade { 
+    from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} 
+    to {opacity:1; transform:translate(-50%,-50%) scale(1);} 
+}
 
 .landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
 .landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
 .memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
-.question h2 { font-size: 1.8rem; margin-bottom: 20px; }
-.question button { margin: 5px; }
+.question h2 { font-family: 'Kaushan Script', cursive; font-size: 2rem; margin-bottom: 20px; color:#ff4757; }
+.question button { margin: 8px; background: linear-gradient(45deg,#ff9ff3,#ff6b81); color:white; font-size:1.2rem; }
 
-.final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; }
+.final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; text-shadow: 0 0 12px #ff9ff3;}
 .final p { font-size: 1.3rem; line-height: 2rem; color:#2f3542; }
 
 .centered { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
@@ -169,15 +173,15 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- Floating decorations for all pages -->
+<!-- Floating Decorations -->
 <script>
 function addFloatingDecorations() {
     const decoImgs = [
         "https://i.postimg.cc/MTgB9rgH/heart.png",
-        "https://i.postimg.cc/9f8KXQ0V/flower.png",
+        "https://i.postimg.cc/1Xsjm6KT/flower.png",
         "https://i.postimg.cc/3xw3m7v7/balloon.png"
     ];
-    for(let i=0;i<20;i++){
+    for(let i=0;i<25;i++){
         const img = document.createElement("img");
         img.src = decoImgs[Math.floor(Math.random()*decoImgs.length)];
         img.className = "floating";
