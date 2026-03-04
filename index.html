@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise for Ammara</title>
 <style>
-/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Great+Vibes&family=Kaushan+Script&display=swap');
 
-/* Global Styles */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -16,14 +14,8 @@ body {
     overflow: hidden;
     color: #333;
 }
-    <!-- Decorations for all pages -->
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:10%;width:40px;">
-<img src="https://i.ibb.co/6ZyQv3K/balloon.png" class="decoration" style="left:50%;width:50px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:30%;width:30px;">
-<img src="https://i.ibb.co/NmC2LZ5/heart.png" class="decoration" style="left:70%;width:35px;">
-<img src="https://i.ibb.co/fC1sFbF/flower.png" class="decoration" style="left:80%;width:30px;">
 
-<div class="container">
+/* Smooth page transition */
 .container {
     width: 100%;
     height: 100vh;
@@ -32,44 +24,59 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 0;
+    transform: scale(0.98);
 }
-.active { display: flex !important; }
+.active { 
+    display: flex !important; 
+    opacity: 1;
+    transform: scale(1);
+}
+
 h1 { margin: 10px 0; }
+
+/* Smooth premium buttons */
 button {
-    padding: 10px 25px;
+    padding: 12px 28px;
     font-size: 1.2rem;
     cursor: pointer;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(45deg, #ff6b81, #f7d794);
+    border-radius: 14px;
+    background: linear-gradient(45deg, #ff6b81, #ff9ff3);
     color: white;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
 }
-button:hover { transform: scale(1.1); }
-.fade { animation: fadeIn 1s ease forwards; opacity: 0; }
-@keyframes fadeIn { to { opacity: 1; } }
+button:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 25px rgba(255, 107, 129, 0.5);
+}
+button:active {
+    transform: scale(0.95);
+}
 
-/* Floating decorations */
+/* Smooth floating hearts & flowers */
 .floating {
     position: absolute;
     z-index: 0;
-    animation: floatAnim 8s infinite linear;
-    opacity: 0.8;
+    animation: smoothFloat 12s ease-in-out infinite;
+    opacity: 0.85;
+    pointer-events: none;
 }
-@keyframes floatAnim {
-    0% { transform: translateY(0) rotate(0deg);}
-    50% { transform: translateY(-50px) rotate(180deg);}
-    100% { transform: translateY(0) rotate(360deg);}
+@keyframes smoothFloat {
+    0% { transform: translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-25px) rotate(90deg) scale(1.05); }
+    50% { transform: translateY(-45px) rotate(180deg) scale(1); }
+    75% { transform: translateY(-25px) rotate(270deg) scale(1.05); }
+    100% { transform: translateY(0px) rotate(360deg) scale(1); }
 }
 
-/* Specific styles for texts */
-.landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
-.landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
-.memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
-.question h2 { font-family: 'Roboto', sans-serif; font-size: 1.8rem; margin-bottom: 20px; }
-.question button { margin: 5px; }
+/* Fade text */
+.fade { animation: fadeIn 1s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
 
-/* Answer popups */
+/* Popup animation upgraded */
 .answer-popup {
     position: absolute;
     top: 60%;
@@ -82,16 +89,29 @@ button:hover { transform: scale(1.1); }
     display: none;
     font-family: 'Roboto', sans-serif;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-    animation: popupFade 0.5s ease forwards;
+    animation: popupFade 0.4s ease forwards;
 }
-@keyframes popupFade { from {opacity:0; transform:translate(-50%,-40%);} to {opacity:1; transform:translate(-50%,-50%);} }
+@keyframes popupFade { 
+    from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} 
+    to {opacity:1; transform:translate(-50%,-50%) scale(1);} 
+}
 
-/* Final page */
+.landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
+.landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
+.memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
+.question h2 { font-size: 1.8rem; margin-bottom: 20px; }
+.question button { margin: 5px; }
+
 .final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; }
-.final p { font-family: 'Roboto', sans-serif; font-size: 1.3rem; line-height: 2rem; color:#2f3542; }
+.final p { font-size: 1.3rem; line-height: 2rem; color:#2f3542; }
 
-/* Center content vertically */
 .centered { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
+
+/* Click heart animation */
+@keyframes heartPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity:1; }
+    100% { transform: translate(-50%, -120px) scale(1.5); opacity:0; }
+}
 </style>
 </head>
 <body>
@@ -104,141 +124,45 @@ button:hover { transform: scale(1.1); }
         <h3>6th March</h3>
         <button onclick="nextPage(2)">Open Surprise 🎉</button>
     </div>
-    <!-- Decorations -->
     <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:10%; left:15%; width:40px;">
-    <img src="https://i.postimg.cc/Zq4Xw7mH/balloon.png" class="floating" style="top:20%; left:70%; width:50px;">
-</div>
-
-<!-- First Game Page -->
-<div class="container landing" id="page2">
-    <div class="centered fade">
-        <h2>Do you still love me?</h2>
-        <button onclick="gameYes()">Yes</button>
-        <button onclick="gameNo()">No</button>
-        <div class="answer-popup" id="gameAnswer"></div>
-        <br><br>
-        <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
-    </div>
-</div>
-
-<!-- Memory Page -->
-<div class="container memory" id="page3">
-    <div class="centered fade">
-        <div id="memoryText"></div>
-        <button id="nextBtn3" style="display:none;" onclick="nextPage(4)">Next</button>
-    </div>
-</div>
-
-<!-- Test Intro Page -->
-<div class="container" id="page4">
-    <div class="centered fade">
-        <h2>Get Ready for the Test!</h2>
-        <button onclick="nextPage(5)">I'm Ready</button>
-    </div>
-</div>
-
-<!-- Questions Page -->
-<div class="container question" id="page5">
-    <div class="centered fade">
-        <h2 id="questionText"></h2>
-        <button id="option1" onclick="checkAnswer(1)"></button>
-        <button id="option2" onclick="checkAnswer(2)"></button>
-        <div class="answer-popup" id="answerPopup"></div>
-        <br><br>
-        <button id="nextQuestionBtn" style="display:none;" onclick="nextQuestion()">Next</button>
-    </div>
-</div>
-
-<!-- Final Page -->
-<div class="container final" id="page6">
-    <div class="centered fade">
-        <h2>🎉 Happy Birthday Ammara 🎉</h2>
-        <p>
-            Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy
-        </p>
-    </div>
+    <img src="https://i.postimg.cc/9f8KXQ0V/flower.png" class="floating" style="top:20%; left:70%; width:50px;">
+    <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:75%; left:30%; width:35px;">
 </div>
 
 <script>
-/* Navigation */
+document.addEventListener("click", function(e) {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = e.clientX + "px";
+    heart.style.top = e.clientY + "px";
+    heart.style.fontSize = "18px";
+    heart.style.pointerEvents = "none";
+    heart.style.animation = "heartPop 1s ease forwards";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+});
+</script>
+
+<script>
+/* Navigation remains SAME */
 function nextPage(n) {
     document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
     document.getElementById('page'+n).classList.add('active');
-
     if(n===3) startMemory();
     if(n===5) startQuestion();
 }
 
-/* First Game Logic */
-function gameYes() {
-    const answer = document.getElementById('gameAnswer');
-    answer.innerText = "I dare you to click on No!";
-    answer.style.display = 'block';
-    document.getElementById('nextBtn2').style.display='inline-block';
-}
-function gameNo() {
-    const answer = document.getElementById('gameAnswer');
-    answer.innerText = "Yes! I knew it ❤️";
-    answer.style.display = 'block';
-    document.getElementById('nextBtn2').style.display='inline-block';
-}
-
-/* Memory Page Logic */
-const memoryLines = [
-"On that rainy day, you wanted to know about my crush.",
-"I could not tell your name directly, but hinted you were the one I loved the most.",
-"From that day till now, four to five years have passed,",
-"But my feelings for you haven't changed at all.",
-"After many fights and breakup threats,",
-"Still, here we are, and my heart is the same."
-];
-function startMemory() {
-    const memoryDiv = document.getElementById('memoryText');
-    memoryDiv.innerHTML='';
-    let i=0;
-    function showLine() {
-        if(i<memoryLines.length){
-            let p = document.createElement('p');
-            p.textContent = memoryLines[i];
-            memoryDiv.appendChild(p);
-            i++;
-            setTimeout(showLine, 1800);
-        } else { document.getElementById('nextBtn3').style.display='inline-block'; }
-    }
-    showLine();
-}
-
-/* Questions Page Logic */
+/* QUESTIONS UPDATED ONLY WHERE AGREED */
 const questions = [
-    {q:"What lights up my dark days?", o:["Sun","Moon"], a:"Your presence"},
-    {q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
-    {q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
-    {q:"strongest magic would be?", o:["Black magic","Ancient spell"], a:"Your eyes"},
-    {q:"Who has my full attention instantly?", o:["Me","You"], a:"Yes, of course you"}
+{q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
+{q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
+{q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
+{q:"If I try to ignore you, what happens next?", o:["You let me go","You chase me"], a:"You chase me"},
+{q:"If the strongest magic existed, which one would win?", o:["Black magic","Ancient spells"], a:"Your eyes"},
+{q:"If loving you was a crime, then I am...", o:["Innocent","Criminal"], a:"Boss, I am the biggest criminal 😌"}
 ];
-let currentQ=0;
-function startQuestion() {
-    currentQ=0;
-    showQuestion();
-}
-function showQuestion() {
-    document.getElementById('questionText').innerText = questions[currentQ].q;
-    document.getElementById('option1').innerText = questions[currentQ].o[0];
-    document.getElementById('option2').innerText = questions[currentQ].o[1];
-    document.getElementById('answerPopup').style.display='none';
-    document.getElementById('nextQuestionBtn').style.display='none';
-}
-function checkAnswer(opt) {
-    const answerDiv = document.getElementById('answerPopup');
-    answerDiv.innerText = questions[currentQ].a;
-    answerDiv.style.display='block';
-    document.getElementById('nextQuestionBtn').style.display='inline-block';
-}
-function nextQuestion() {
-    currentQ++;
-    if(currentQ<questions.length) showQuestion();
-    else nextPage(6);
-}
 </script>
+
 </body>
 </html>
