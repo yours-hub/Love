@@ -5,17 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise for Ammara</title>
 <style>
-/* Import Google Fonts */
+/* ===== Google Fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Great+Vibes&family=Kaushan+Script&display=swap');
 
-/* Global Styles */
+/* ===== Global Styles ===== */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #ffe6f0, #fff0e6);
     overflow: hidden;
     color: #333;
+    position: relative;
 }
+
+/* ===== Containers / Pages ===== */
 .container {
     width: 100%;
     height: 100vh;
@@ -24,44 +27,66 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 0;
+    transform: scale(0.98);
 }
-.active { display: flex !important; }
-h1, h2, h3, p { margin: 10px 0; }
+.active { 
+    display: flex !important; 
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== Centered ===== */
+.centered { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    width: 100%; 
+}
+
+/* ===== Buttons ===== */
 button {
-    padding: 10px 25px;
-    font-size: 1.2rem;
+    padding: 12px 28px;
+    font-size: 1.3rem;
     cursor: pointer;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(45deg, #ff6b81, #f7d794);
+    border-radius: 18px;
+    background: linear-gradient(45deg, #ff6b81, #ff9ff3);
     color: white;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 20px rgba(255, 107, 129, 0.3);
+    font-family: 'Kaushan Script', cursive;
 }
-button:hover { transform: scale(1.1); }
-.fade { animation: fadeIn 1s ease forwards; opacity: 0; }
-@keyframes fadeIn { to { opacity: 1; } }
+button:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 12px 25px rgba(255, 107, 129, 0.5);
+}
+button:active { transform: scale(0.95); }
 
-/* Floating decorations */
+/* ===== Floating Decorations ===== */
 .floating {
     position: absolute;
     z-index: 0;
-    animation: floatAnim 8s infinite linear;
-    opacity: 0.8;
+    animation: floatAnim 12s ease-in-out infinite;
+    opacity: 0.85;
+    pointer-events: none;
 }
 @keyframes floatAnim {
-    0% { transform: translateY(0) rotate(0deg);}
-    50% { transform: translateY(-50px) rotate(180deg);}
-    100% { transform: translateY(0) rotate(360deg);}
+    0% { transform: translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-25px) rotate(45deg) scale(1.05); }
+    50% { transform: translateY(-50px) rotate(180deg) scale(1); }
+    75% { transform: translateY(-25px) rotate(270deg) scale(1.05); }
+    100% { transform: translateY(0px) rotate(360deg) scale(1); }
 }
 
-/* Specific styles for texts */
-.landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
-.landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
-.memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
-.question h2 { font-family: 'Pacifico', cursive; font-size: 1.8rem; margin-bottom: 20px; color:#ff4757; }
-.question button { margin: 5px; font-family: 'Kaushan Script', cursive; }
+/* ===== Fade Text ===== */
+.fade { animation: fadeIn 1s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
 
-/* Answer popups */
+/* ===== Answer Popup ===== */
 .answer-popup {
     position: absolute;
     top: 60%;
@@ -69,38 +94,55 @@ button:hover { transform: scale(1.1); }
     transform: translate(-50%, -50%);
     background: #ff6b81;
     color: white;
-    padding: 12px 25px;
-    border-radius: 12px;
+    padding: 14px 28px;
+    border-radius: 14px;
     display: none;
     font-family: 'Roboto', sans-serif;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-    animation: popupFade 0.5s ease forwards;
+    animation: popupFade 0.4s ease forwards;
+    z-index: 5;
 }
-@keyframes popupFade { from {opacity:0; transform:translate(-50%,-40%);} to {opacity:1; transform:translate(-50%,-50%);} }
+@keyframes popupFade { 
+    from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} 
+    to {opacity:1; transform:translate(-50%,-50%) scale(1);} 
+}
 
-/* Final page */
-.final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; }
-.final p { font-family: 'Great Vibes', cursive; font-size: 1.4rem; line-height: 2rem; color:#2f3542; margin-bottom:20px; }
-.thank-you {
+/* ===== Section Fonts ===== */
+.landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
+.landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
+.memory p { font-family: 'Great Vibes', cursive; font-size: 1.6rem; line-height: 2.2rem; color: #2f3542; margin: 10px 0; }
+.question h2 { font-family: 'Kaushan Script', cursive; font-size: 2rem; margin-bottom: 20px; color:#ff4757; }
+.question button { margin: 8px; background: linear-gradient(45deg,#ff9ff3,#ff6b81); color:white; font-size:1.2rem; border-radius:12px; }
+
+/* ===== Final Page ===== */
+.final h2 { font-family: 'Pacifico', cursive; font-size: 2rem; margin: 10px 0; color:#ff4757; text-shadow: 0 0 12px #ff9ff3;}
+.final p { font-size: 1.3rem; line-height: 2rem; color:#2f3542; position:relative; z-index:1; }
+
+/* ===== Click Heart Animation ===== */
+@keyframes heartPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity:1; }
+    100% { transform: translate(-50%, -120px) scale(1.5); opacity:0; }
+}
+
+/* ===== Animated Thank You ===== */
+#thankyou {
     font-family: 'Pacifico', cursive;
     font-size: 2rem;
-    color:#ff6b81;
-    animation: thankAnim 2s infinite alternate;
-    margin-top: 15px;
+    color: #ff4757;
+    margin-top: 20px;
+    opacity: 0;
+    animation: thankAnim 2s ease forwards 1s;
 }
 @keyframes thankAnim {
-    0% { transform: scale(1); opacity:1; }
-    50% { transform: scale(1.1); opacity:0.9; }
-    100% { transform: scale(1); opacity:1; }
+    0% { opacity:0; transform: scale(0.5);}
+    50% { opacity:1; transform: scale(1.2);}
+    100% { opacity:1; transform: scale(1);}
 }
-
-/* Center content vertically */
-.centered { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
 </style>
 </head>
 <body>
 
-<!-- Landing Page -->
+<!-- ===== Landing Page ===== -->
 <div class="container landing active" id="page1">
     <div class="centered fade">
         <h1>Happy Birthday</h1>
@@ -108,26 +150,21 @@ button:hover { transform: scale(1.1); }
         <h3>6th March</h3>
         <button onclick="nextPage(2)">Open Surprise 🎉</button>
     </div>
-    <!-- Decorations -->
-    <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:10%; left:15%; width:40px;">
-    <img src="https://i.postimg.cc/Zq4Xw7mH/balloon.png" class="floating" style="top:20%; left:70%; width:50px;">
-    <img src="https://i.postimg.cc/3x3QzTGH/flower.png" class="floating" style="top:50%; left:30%; width:35px;">
-    <img src="https://i.postimg.cc/VN3GgLkH/heart.png" class="floating" style="top:70%; left:80%; width:40px;">
 </div>
 
-<!-- First Game Page -->
+<!-- ===== First Game Page ===== -->
 <div class="container landing" id="page2">
     <div class="centered fade">
         <h2>Do you love me, Ammara?</h2>
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
+        <button id="yesBtn" onclick="gameYes()">Yes</button>
+        <button id="noBtn" onclick="gameNo()">No</button>
         <div class="answer-popup" id="gameAnswer"></div>
         <br><br>
         <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
     </div>
 </div>
 
-<!-- Memory Page -->
+<!-- ===== Memory Page ===== -->
 <div class="container memory" id="page3">
     <div class="centered fade">
         <div id="memoryText"></div>
@@ -135,7 +172,7 @@ button:hover { transform: scale(1.1); }
     </div>
 </div>
 
-<!-- Test Intro Page -->
+<!-- ===== Test Intro Page ===== -->
 <div class="container" id="page4">
     <div class="centered fade">
         <h2>Get Ready for the Test!</h2>
@@ -143,7 +180,7 @@ button:hover { transform: scale(1.1); }
     </div>
 </div>
 
-<!-- Questions Page -->
+<!-- ===== Questions Page ===== -->
 <div class="container question" id="page5">
     <div class="centered fade">
         <h2 id="questionText"></h2>
@@ -155,72 +192,85 @@ button:hover { transform: scale(1.1); }
     </div>
 </div>
 
-<!-- Final Page -->
+<!-- ===== Final Page ===== -->
 <div class="container final" id="page6">
     <div class="centered fade">
         <h2>🎉 Happy Birthday Ammara 🎉</h2>
         <p>
-            Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy
+            Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨
         </p>
-        <div class="thank-you">Thank You ❤️</div>
-        <!-- Decorations -->
-        <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:10%; left:10%; width:30px;">
-        <img src="https://i.postimg.cc/3x3QzTGH/flower.png" class="floating" style="top:40%; left:50%; width:30px;">
-        <img src="https://i.postimg.cc/VN3GgLkH/heart.png" class="floating" style="top:70%; left:80%; width:30px;">
+        <div id="thankyou">Thank You ❤️</div>
     </div>
 </div>
 
+<!-- ===== Floating Decorations ===== -->
 <script>
-/* Navigation */
-function nextPage(n) {
-    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-    document.getElementById('page'+n).classList.add('active');
+function addFloatingDecorations() {
+    const deco = ["❤️","🌸","🎈"];
+    for(let i=0;i<40;i++){
+        let span = document.createElement("span");
+        span.innerText = deco[Math.floor(Math.random()*deco.length)];
+        span.style.position="absolute";
+        span.style.left=Math.random()*100+"%";
+        span.style.top=Math.random()*100+"%";
+        span.style.fontSize=(20+Math.random()*30)+"px";
+        span.style.opacity=0.8;
+        span.style.animation=`floatAnim ${8+Math.random()*5}s ease-in-out infinite`;
+        document.body.appendChild(span);
+    }
+}
+addFloatingDecorations();
 
+// Click heart animation
+document.addEventListener("click", function(e){
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = e.clientX+"px";
+    heart.style.top = e.clientY+"px";
+    heart.style.fontSize = "18px";
+    heart.style.pointerEvents = "none";
+    heart.style.animation = "heartPop 1s ease forwards";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+});
+</script>
+
+<!-- ===== Navigation, Game, Memory, Questions ===== -->
+<script>
+function nextPage(n){
+    document.querySelectorAll('.container').forEach(c=>c.classList.remove('active'));
+    document.getElementById('page'+n).classList.add('active');
     if(n===3) startMemory();
     if(n===5) startQuestion();
 }
 
-/* First Game Logic - Do You Love Me? */
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
-const gameAnswer = document.getElementById('gameAnswer');
-const nextBtn2 = document.getElementById('nextBtn2');
-
-let noClicks = 0;
-
-yesBtn.onclick = () => {
-    yesBtn.style.display='none';
-    noBtn.style.display='none';
-    gameAnswer.innerText = "I dare you to click on No!";
-    gameAnswer.style.display = 'block';
-    nextBtn2.style.display='inline-block';
-};
-
-noBtn.onclick = () => {
-    if(noClicks < 2){
-        moveNoButton();
-        noClicks++;
+/* ===== Game Page ===== */
+let noClickCount=0;
+function gameYes(){
+    const answer=document.getElementById('gameAnswer');
+    answer.innerText="I dare you to click on No!";
+    answer.style.display='block';
+    document.getElementById('nextBtn2').style.display='inline-block';
+}
+function gameNo(){
+    const noBtn=document.getElementById('noBtn');
+    const yesBtn=document.getElementById('yesBtn');
+    if(noClickCount<2){
+        // move button
+        noBtn.style.position='absolute';
+        noBtn.style.top=Math.random()*70+'%';
+        noBtn.style.left=Math.random()*70+'%';
+        noClickCount++;
     } else {
-        yesBtn.style.display='none';
-        noBtn.style.display='none';
-        gameAnswer.innerText = "Yes behind No, I knew it ❤️";
-        gameAnswer.style.display='block';
-        nextBtn2.style.display='inline-block';
+        const answer=document.getElementById('gameAnswer');
+        answer.innerText="Yes behind No, I knew it ❤️";
+        answer.style.display='block';
+        document.getElementById('nextBtn2').style.display='inline-block';
     }
-};
-
-function moveNoButton(){
-    const container = document.getElementById('page2');
-    const maxX = container.offsetWidth - noBtn.offsetWidth - 20;
-    const maxY = container.offsetHeight - noBtn.offsetHeight - 20;
-    const newX = Math.floor(Math.random() * maxX);
-    const newY = Math.floor(Math.random() * maxY);
-    noBtn.style.position = 'absolute';
-    noBtn.style.left = newX + 'px';
-    noBtn.style.top = newY + 'px';
 }
 
-/* Memory Page Logic */
+/* ===== Memory Page ===== */
 const memoryLines = [
 "On that rainy day, you wanted to know about my crush.",
 "I could not tell your name directly, but hinted you were the one I loved the most.",
@@ -229,53 +279,53 @@ const memoryLines = [
 "After many fights and breakup threats,",
 "Still, here we are, and my heart is the same."
 ];
-function startMemory() {
-    const memoryDiv = document.getElementById('memoryText');
+function startMemory(){
+    const memoryDiv=document.getElementById('memoryText');
     memoryDiv.innerHTML='';
     let i=0;
-    function showLine() {
+    function showLine(){
         if(i<memoryLines.length){
-            let p = document.createElement('p');
-            p.textContent = memoryLines[i];
+            let p=document.createElement('p');
+            p.textContent=memoryLines[i];
             memoryDiv.appendChild(p);
             i++;
-            setTimeout(showLine, 1800);
-        } else { document.getElementById('nextBtn3').style.display='inline-block'; }
+            setTimeout(showLine,1800);
+        } else {
+            document.getElementById('nextBtn3').style.display='inline-block';
+        }
     }
     showLine();
 }
 
-/* Questions Page Logic */
-const questions = [
-    {q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
-    {q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
-    {q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
-    {q:"Which magic is the strongest if any?", o:["Black magic","Ancient spells"], a:"Your eyes"},
-    {q:"If living you was a crime, then I am innocent", o:["Yes","Criminal"], a:"Boss, I am the biggest criminal"}
+/* ===== Questions Page ===== */
+const questions=[
+{q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
+{q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
+{q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
+{q:"If the strongest magic existed, which one would win?", o:["Black magic","Ancient spells"], a:"Your eyes"},
+{q:"If loving you was a crime, then I am...", o:["Innocent","Criminal"], a:"Boss, I am the biggest criminal 😌"}
 ];
 let currentQ=0;
-function startQuestion() {
-    currentQ=0;
-    showQuestion();
-}
-function showQuestion() {
-    document.getElementById('questionText').innerText = questions[currentQ].q;
-    document.getElementById('option1').innerText = questions[currentQ].o[0];
-    document.getElementById('option2').innerText = questions[currentQ].o[1];
+function startQuestion(){currentQ=0; showQuestion();}
+function showQuestion(){
+    document.getElementById('questionText').innerText=questions[currentQ].q;
+    document.getElementById('option1').innerText=questions[currentQ].o[0];
+    document.getElementById('option2').innerText=questions[currentQ].o[1];
     document.getElementById('answerPopup').style.display='none';
     document.getElementById('nextQuestionBtn').style.display='none';
     document.getElementById('option1').style.display='inline-block';
     document.getElementById('option2').style.display='inline-block';
 }
-function checkAnswer(opt) {
-    const answerDiv = document.getElementById('answerPopup');
-    answerDiv.innerText = questions[currentQ].a;
+function checkAnswer(opt){
+    const answerDiv=document.getElementById('answerPopup');
+    answerDiv.innerText=questions[currentQ].a;
     answerDiv.style.display='block';
     document.getElementById('nextQuestionBtn').style.display='inline-block';
+    // hide options
     document.getElementById('option1').style.display='none';
     document.getElementById('option2').style.display='none';
 }
-function nextQuestion() {
+function nextQuestion(){
     currentQ++;
     if(currentQ<questions.length) showQuestion();
     else nextPage(6);
