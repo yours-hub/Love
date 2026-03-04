@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise for Ammara</title>
 <style>
+/* ===== Google Fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Great+Vibes&family=Kaushan+Script&display=swap');
 
 /* ===== Global Styles ===== */
@@ -14,9 +15,10 @@ body {
     background: linear-gradient(135deg, #ffe6f0, #fff0e6);
     overflow: hidden;
     color: #333;
+    position: relative;
 }
 
-/* ===== Container / Page Transition ===== */
+/* ===== Containers / Pages ===== */
 .container {
     width: 100%;
     height: 100vh;
@@ -35,7 +37,7 @@ body {
     transform: scale(1);
 }
 
-/* ===== Centering ===== */
+/* ===== Centered ===== */
 .centered { 
     display: flex; 
     flex-direction: column; 
@@ -48,10 +50,10 @@ body {
 /* ===== Buttons ===== */
 button {
     padding: 12px 28px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
     border: none;
-    border-radius: 16px;
+    border-radius: 18px;
     background: linear-gradient(45deg, #ff6b81, #ff9ff3);
     color: white;
     transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -59,7 +61,7 @@ button {
     font-family: 'Kaushan Script', cursive;
 }
 button:hover {
-    transform: translateY(-4px) scale(1.08);
+    transform: translateY(-5px) scale(1.1);
     box-shadow: 0 12px 25px rgba(255, 107, 129, 0.5);
 }
 button:active { transform: scale(0.95); }
@@ -184,28 +186,26 @@ button:active { transform: scale(0.95); }
     </div>
 </div>
 
-<!-- ===== Floating Decorations ===== -->
+<!-- ===== Floating Decorations (CSS-based) ===== -->
+<div id="decorations"></div>
 <script>
 function addFloatingDecorations() {
-    const decoImgs = [
-        "https://i.postimg.cc/MTgB9rgH/heart.png",
-        "https://i.postimg.cc/1Xsjm6KT/flower.png",
-        "https://i.postimg.cc/3xw3m7v7/balloon.png"
-    ];
-    for(let i=0;i<30;i++){
-        const img = document.createElement("img");
-        img.src = decoImgs[Math.floor(Math.random()*decoImgs.length)];
-        img.className = "floating";
-        img.style.width = (20+Math.random()*40)+"px";
-        img.style.top = Math.random()*100+"%";
-        img.style.left = Math.random()*100+"%";
-        img.style.animationDuration = (8+Math.random()*6)+"s";
-        document.body.appendChild(img);
+    const deco = ["❤️","🌸","🎈"];
+    for(let i=0;i<40;i++){
+        let span = document.createElement("span");
+        span.innerText = deco[Math.floor(Math.random()*deco.length)];
+        span.style.position="absolute";
+        span.style.left=Math.random()*100+"%";
+        span.style.top=Math.random()*100+"%";
+        span.style.fontSize=(20+Math.random()*30)+"px";
+        span.style.opacity=0.8;
+        span.style.animation=`floatAnim ${8+Math.random()*5}s ease-in-out infinite`;
+        document.body.appendChild(span);
     }
 }
 addFloatingDecorations();
 
-// Click hearts
+// Click heart animation
 document.addEventListener("click", function(e){
     const heart = document.createElement("div");
     heart.innerHTML = "❤️";
@@ -220,7 +220,7 @@ document.addEventListener("click", function(e){
 });
 </script>
 
-<!-- ===== Navigation + Game + Memory + Questions Logic ===== -->
+<!-- ===== Navigation, Game, Memory, Questions ===== -->
 <script>
 function nextPage(n){
     document.querySelectorAll('.container').forEach(c=>c.classList.remove('active'));
@@ -229,6 +229,7 @@ function nextPage(n){
     if(n===5) startQuestion();
 }
 
+// First Game
 function gameYes(){
     const answer=document.getElementById('gameAnswer');
     answer.innerText="I dare you to click on No!";
@@ -242,6 +243,7 @@ function gameNo(){
     document.getElementById('nextBtn2').style.display='inline-block';
 }
 
+// Memory
 const memoryLines = [
 "On that rainy day, you wanted to know about my crush.",
 "I could not tell your name directly, but hinted you were the one I loved the most.",
@@ -298,6 +300,5 @@ function nextQuestion(){
     else nextPage(6);
 }
 </script>
-
 </body>
 </html>
