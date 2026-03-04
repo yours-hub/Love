@@ -15,7 +15,7 @@ body {
     color: #333;
 }
 
-/* Smooth page transition */
+/* Smooth page transitions */
 .container {
     width: 100%;
     height: 100vh;
@@ -34,9 +34,7 @@ body {
     transform: scale(1);
 }
 
-h1 { margin: 10px 0; }
-
-/* Smooth premium buttons */
+/* Buttons */
 button {
     padding: 12px 28px;
     font-size: 1.2rem;
@@ -52,31 +50,29 @@ button:hover {
     transform: translateY(-4px) scale(1.08);
     box-shadow: 0 12px 25px rgba(255, 107, 129, 0.5);
 }
-button:active {
-    transform: scale(0.95);
-}
+button:active { transform: scale(0.95); }
 
-/* Smooth floating hearts & flowers */
+/* Floating decorations */
 .floating {
     position: absolute;
     z-index: 0;
-    animation: smoothFloat 12s ease-in-out infinite;
-    opacity: 0.85;
+    animation: floatAnim 12s ease-in-out infinite;
+    opacity: 0.8;
     pointer-events: none;
 }
-@keyframes smoothFloat {
+@keyframes floatAnim {
     0% { transform: translateY(0px) rotate(0deg) scale(1); }
-    25% { transform: translateY(-25px) rotate(90deg) scale(1.05); }
-    50% { transform: translateY(-45px) rotate(180deg) scale(1); }
+    25% { transform: translateY(-25px) rotate(45deg) scale(1.05); }
+    50% { transform: translateY(-50px) rotate(180deg) scale(1); }
     75% { transform: translateY(-25px) rotate(270deg) scale(1.05); }
     100% { transform: translateY(0px) rotate(360deg) scale(1); }
 }
 
-/* Fade text */
+/* Text fade */
 .fade { animation: fadeIn 1s ease forwards; opacity: 0; }
 @keyframes fadeIn { to { opacity: 1; } }
 
-/* Popup animation upgraded */
+/* Popup */
 .answer-popup {
     position: absolute;
     top: 60%;
@@ -91,10 +87,7 @@ button:active {
     box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
     animation: popupFade 0.4s ease forwards;
 }
-@keyframes popupFade { 
-    from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} 
-    to {opacity:1; transform:translate(-50%,-50%) scale(1);} 
-}
+@keyframes popupFade { from {opacity:0; transform:translate(-50%,-40%) scale(0.8);} to {opacity:1; transform:translate(-50%,-50%) scale(1);} }
 
 .landing h1 { font-family: 'Pacifico', cursive; font-size: 4rem; color: #ff4757; }
 .landing h2 { font-family: 'Kaushan Script', cursive; font-size: 2.5rem; color: #ff6b81; }
@@ -124,37 +117,144 @@ button:active {
         <h3>6th March</h3>
         <button onclick="nextPage(2)">Open Surprise 🎉</button>
     </div>
-    <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:10%; left:15%; width:40px;">
-    <img src="https://i.postimg.cc/9f8KXQ0V/flower.png" class="floating" style="top:20%; left:70%; width:50px;">
-    <img src="https://i.postimg.cc/MTgB9rgH/heart.png" class="floating" style="top:75%; left:30%; width:35px;">
 </div>
 
+<!-- First Game Page -->
+<div class="container landing" id="page2">
+    <div class="centered fade">
+        <h2>Do you still love me?</h2>
+        <button onclick="gameYes()">Yes</button>
+        <button onclick="gameNo()">No</button>
+        <div class="answer-popup" id="gameAnswer"></div>
+        <br><br>
+        <button id="nextBtn2" style="display:none;" onclick="nextPage(3)">Next</button>
+    </div>
+</div>
+
+<!-- Memory Page -->
+<div class="container memory" id="page3">
+    <div class="centered fade">
+        <div id="memoryText"></div>
+        <button id="nextBtn3" style="display:none;" onclick="nextPage(4)">Next</button>
+    </div>
+</div>
+
+<!-- Test Intro Page -->
+<div class="container" id="page4">
+    <div class="centered fade">
+        <h2>Get Ready for the Test!</h2>
+        <button onclick="nextPage(5)">I'm Ready</button>
+    </div>
+</div>
+
+<!-- Questions Page -->
+<div class="container question" id="page5">
+    <div class="centered fade">
+        <h2 id="questionText"></h2>
+        <button id="option1" onclick="checkAnswer(1)"></button>
+        <button id="option2" onclick="checkAnswer(2)"></button>
+        <div class="answer-popup" id="answerPopup"></div>
+        <br><br>
+        <button id="nextQuestionBtn" style="display:none;" onclick="nextQuestion()">Next</button>
+    </div>
+</div>
+
+<!-- Final Page -->
+<div class="container final" id="page6">
+    <div class="centered fade">
+        <h2>🎉 Happy Birthday Ammara 🎉</h2>
+        <p>
+            Happy birthday Ammara meri pyaari ankho vliiii ♥️ meri Kaki. Am sorry start ki birthdays pr larai kr leta tha wish ni kr pata tha but abhi chahta k jb tk real mh physically wish ni kr skta tb tk online tu achy sy kruu. Although chat gpt ki help liii but ideas nd text sb Mera likha vy hn. At the end khush rhyn hamesha bcz hm jhn b hu jaisy b hu mera sb kuch hn ap ✨ nd thank you mera hony or mera bn kr rehny k lye 💕 or inshallah ap mujhy hamesha khud k sth khrra pao gy
+        </p>
+    </div>
+</div>
+
+<!-- Floating decorations for all pages -->
 <script>
-document.addEventListener("click", function(e) {
+function addFloatingDecorations() {
+    const decoImgs = [
+        "https://i.postimg.cc/MTgB9rgH/heart.png",
+        "https://i.postimg.cc/9f8KXQ0V/flower.png",
+        "https://i.postimg.cc/3xw3m7v7/balloon.png"
+    ];
+    for(let i=0;i<20;i++){
+        const img = document.createElement("img");
+        img.src = decoImgs[Math.floor(Math.random()*decoImgs.length)];
+        img.className = "floating";
+        img.style.width = (20+Math.random()*40)+"px";
+        img.style.top = Math.random()*100+"%";
+        img.style.left = Math.random()*100+"%";
+        img.style.animationDuration = (8+Math.random()*6)+"s";
+        document.body.appendChild(img);
+    }
+}
+addFloatingDecorations();
+
+// Click heart animation
+document.addEventListener("click", function(e){
     const heart = document.createElement("div");
     heart.innerHTML = "❤️";
     heart.style.position = "fixed";
-    heart.style.left = e.clientX + "px";
-    heart.style.top = e.clientY + "px";
+    heart.style.left = e.clientX+"px";
+    heart.style.top = e.clientY+"px";
     heart.style.fontSize = "18px";
     heart.style.pointerEvents = "none";
     heart.style.animation = "heartPop 1s ease forwards";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1000);
+    setTimeout(()=>heart.remove(),1000);
 });
 </script>
 
+<!-- Navigation & Game/Memory/Questions Logic -->
 <script>
-/* Navigation remains SAME */
-function nextPage(n) {
-    document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+function nextPage(n){
+    document.querySelectorAll('.container').forEach(c=>c.classList.remove('active'));
     document.getElementById('page'+n).classList.add('active');
     if(n===3) startMemory();
     if(n===5) startQuestion();
 }
 
-/* QUESTIONS UPDATED ONLY WHERE AGREED */
-const questions = [
+function gameYes(){
+    const answer=document.getElementById('gameAnswer');
+    answer.innerText="I dare you to click on No!";
+    answer.style.display='block';
+    document.getElementById('nextBtn2').style.display='inline-block';
+}
+function gameNo(){
+    const answer=document.getElementById('gameAnswer');
+    answer.innerText="Yes! I knew it ❤️";
+    answer.style.display='block';
+    document.getElementById('nextBtn2').style.display='inline-block';
+}
+
+const memoryLines = [
+"On that rainy day, you wanted to know about my crush.",
+"I could not tell your name directly, but hinted you were the one I loved the most.",
+"From that day till now, four to five years have passed,",
+"But my feelings for you haven't changed at all.",
+"After many fights and breakup threats,",
+"Still, here we are, and my heart is the same."
+];
+function startMemory(){
+    const memoryDiv=document.getElementById('memoryText');
+    memoryDiv.innerHTML='';
+    let i=0;
+    function showLine(){
+        if(i<memoryLines.length){
+            let p=document.createElement('p');
+            p.textContent=memoryLines[i];
+            memoryDiv.appendChild(p);
+            i++;
+            setTimeout(showLine,1800);
+        } else {
+            document.getElementById('nextBtn3').style.display='inline-block';
+        }
+    }
+    showLine();
+}
+
+// Questions
+const questions=[
 {q:"What lights up my dark night?", o:["Sun","Moon"], a:"Your presence"},
 {q:"If happiness were a place, where would it be?", o:["Beach","Mountains"], a:"Next to you"},
 {q:"If love had a flavor, which would it taste like?", o:["Sweet","Bitter"], a:"Just like you"},
@@ -162,6 +262,26 @@ const questions = [
 {q:"If the strongest magic existed, which one would win?", o:["Black magic","Ancient spells"], a:"Your eyes"},
 {q:"If loving you was a crime, then I am...", o:["Innocent","Criminal"], a:"Boss, I am the biggest criminal 😌"}
 ];
+let currentQ=0;
+function startQuestion(){currentQ=0; showQuestion();}
+function showQuestion(){
+    document.getElementById('questionText').innerText=questions[currentQ].q;
+    document.getElementById('option1').innerText=questions[currentQ].o[0];
+    document.getElementById('option2').innerText=questions[currentQ].o[1];
+    document.getElementById('answerPopup').style.display='none';
+    document.getElementById('nextQuestionBtn').style.display='none';
+}
+function checkAnswer(opt){
+    const answerDiv=document.getElementById('answerPopup');
+    answerDiv.innerText=questions[currentQ].a;
+    answerDiv.style.display='block';
+    document.getElementById('nextQuestionBtn').style.display='inline-block';
+}
+function nextQuestion(){
+    currentQ++;
+    if(currentQ<questions.length) showQuestion();
+    else nextPage(6);
+}
 </script>
 
 </body>
